@@ -20,7 +20,7 @@
  >     * How work will be divided between the team members
 
 ## Class Diagram
-Both "Player" and "Enemy" classes inherit from the "Character" class. THe "Knight,""Mage," and "Rogue" classes inherit from the "Player" class, and are among the classes the player cane choose from when they start the game. 
+Both "Player" and "Enemy" classes inherit from the "Character" class. The "Knight,""Mage," and "Rogue" classes inherit from the "Player" class, and are among the classes the player cane choose from when they start the game. 
 
 The "Enemy" class will be used to create the enemies that will appear on the different levels of the game. They will be created before the game starts.
 
