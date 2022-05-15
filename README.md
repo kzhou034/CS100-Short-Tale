@@ -16,24 +16,9 @@ The "Enemy" class will be used to create the enemies that will appear on the dif
 
 The "Player" class will be used to create the player character at the start of the game. Depending on which class the player chooses, they will have different stats. Knights have balanced stats; they deal physical damage and are limited by their stamina. Mages attack with magic, but their attacks are limited by how much mana they have. They have higher magic resistance but lower physical defense. Rogues have low defense and resistance stats. They deal physical damage, but less than a knight. They trade less damage in favor of higher speed, which allows them to attack first or run away during battle. They later unlock the ability to pick locks on doors. 
 
-![UML_Diagram_Milestone2](https://user-images.githubusercontent.com/77300057/166176810-64571e86-c6ec-4864-bb83-5ddf4875bb00.png)
+![Updated_UML _Composite_Character drawio (1)](https://user-images.githubusercontent.com/77300057/168492580-58d385f3-576f-42be-8b36-c0c1ebb527e9.png)
  
- > ## Phase III
- > You will need to schedule a check-in for the second scrum meeting with the same reader you had your first scrum meeting with (using Calendly). Your entire team must be present. This meeting will occur on week 8 during lab time.
- > * Before the meeting you should perform a sprint plan like you did in Phase II.
- > * You should also update this README file by adding the following:
- >   * What design pattern(s) did you use? For each pattern you must explain in 4-5 sentences:
- >     * Why did you pick this pattern? And what feature did you implement with it?
- >     * How did the design pattern help you write better code?
- >   * An updated class diagram that reflects the design pattern(s) you used. You may combine multiple design patterns into one diagram if you'd like, but it needs to be clear which portion of the diagram represents which design pattern (either in the diagram or in the description).
- >   * Make sure your README file (and Project board) are up-to-date reflecting the current status of your project. Previous versions of the README file should still be visible through your commit history.
-> 
-> During the meeting with your reader you will discuss: 
- > * How effective your last sprint was (each member should talk about what they did)
- > * Any tasks that did not get completed last sprint, and how you took them into consideration for this sprint
- > * Any bugs you've identified and created issues for during the sprint. Do you plan on fixing them in the next sprint or are they lower priority?
- > * What tasks you are planning for this next sprint.
-
+Here, we used a composite design pattern to help implement the Enemy class. The Enemy class differs from the other three because the "Enemy" role is not a role that the player can choose when creating their character. There will be a vector that stores the enemies as Character objects, and a different enemy will be used for each level. The design pattern helps to write better code because it allows us to separate the different classes and see how they are different or similar. It also allows us to direct our focus on certain aspects of each class.
  
  > ## Final deliverable
  > All group members will give a demo to the TA/reader during lab time. The TA/reader will check the demo and the project GitHub repository and ask a few questions to all the team members. 
