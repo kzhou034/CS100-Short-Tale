@@ -17,8 +17,29 @@ The "Enemy" class will be used to create the enemies that will appear on the dif
 The "Player" class will be used to create the player character at the start of the game. Depending on which class the player chooses, they will have different stats. Knights have balanced stats; they deal physical damage and are limited by their stamina. Mages attack with magic, but their attacks are limited by how much mana they have. They have higher magic resistance but lower physical defense. Rogues have low defense and resistance stats. They deal physical damage, but less than a knight. They trade less damage in favor of higher speed, which allows them to attack first or run away during battle. They later unlock the ability to pick locks on doors. 
 
 ![Updated_UML _Composite_Character drawio (1)](https://user-images.githubusercontent.com/77300057/168492580-58d385f3-576f-42be-8b36-c0c1ebb527e9.png)
- 
+
+
 Here, we used a composite design pattern to help implement the Enemy class. The Enemy class differs from the other three because the "Enemy" role is not a role that the player can choose when creating their character. There will be a vector that stores the enemies as Character objects, and a different enemy will be used for each level. The design pattern helps to write better code because it allows us to separate the different classes and see how they are different or similar. It also allows us to direct our focus on certain aspects of each class, such as skills or differences in character statistics.
+ 
+ ## Class Diagram 2 - Composite Design Pattern
+
+The "Inventory" class will be used to create an inventory system in which players can interact with the interface to use healing items or battle items.
+
+The "Battle Items" class will be used to select from two select items in the battle item inventory.
+
+The "Healing Items" class will be used similarly to "Battle Items" (see above).
+
+The "Smoke Bomb" class will be used to guarantee running away from enemies.
+
+The "Strength Potion" class will be used to empower the player's attacks.
+
+The "Mana Potion" class will be used to recover mana for mages.
+
+The "Health Potion" class will be used to recover health for all classes.
+
+![Inventory Composite Pattern](https://user-images.githubusercontent.com/101243368/168518001-a6b23364-b519-4b27-9ae0-b19642381198.png)
+ 
+Here, we used a composite design pattern to implement the entire inventory. The Inventory is interacted with by the player and will contain all of the other aspects, which are "contained" within the Inventory. The Inventory can exist without any of the following classes, by having an "empty" Inventory, but we have categorized items to exist within the Inventory and to be sorted by the type of items that they are are under the composite classes. In this way, we are able to better sort the inventory and allow item buying and selection to be a lot more manageable. This design pattern allows us to write better code because it gives us a better understanding of how the inventory to work and we can work around this pattern in consideration of how the Inventory should look like when it is fully developed.
  
  > ## Final deliverable
  > All group members will give a demo to the TA/reader during lab time. The TA/reader will check the demo and the project GitHub repository and ask a few questions to all the team members. 
