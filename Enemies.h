@@ -49,7 +49,9 @@ class Enemy : public Character {
 		void setlevel(int); // make sure to only use default constructor unless you want crazy scaling
 		void heal();
 		void attack(Character*);
-		// plan on adding a function to calculate damage taken
+		void hurt(Character*);
+		void print();
+		void action(Character*);
 
 		bool picklock();
 		void add(Character*);

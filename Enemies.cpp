@@ -142,14 +142,81 @@ void Enemy::heal() {
 	}
 }
 void Enemy::attack(Character* target) {
-	int dmg;
+	int dmg = get_attack();
+	int mod = rand() % (get_level() * 3);
+	srand(time(0));
+	int ch = rand() % 3;
+
+	if (ch == 0) {
+		dmg += mod;
+	}
+	else if (ch == 1) {
+		dmg -= mod;
+	}
+
 	if (get_type() == "magic") {
-		dmg = get_attack() - target->get_resistance();
+		dmg -= target->get_resistance();
 	}
 	else {
-		dmg = get_attack() - target->get_defense();
+		dmg -= target->get_defense();
 	}
+	
+	if (dmg < 0)
+		dmg = 0;
+
 	target->set_health(target->get_health() - dmg);
+
+	cout << target->get_name() << " took " << dmg << " points of damage" << endl;
+}
+void Enemy::hurt(Character* target) { 
+	int dmg;
+	if (target->get_type() == "magic") {
+		dmg = target->get_attack() - get_resistance();
+	}
+	else {
+		dmg = target->get_attack() - get_defense();
+	}
+
+	if (dmg < 0)
+		dmg = 0;
+	
+	set_health(get_health() - dmg);
+
+	cout << get_name() << " took " << dmg << " points of damage" << endl;
+}
+void Enemy::print() {
+	cout << "Name: " << get_name() << endl;
+	cout << "Level: " << get_level() << endl;
+	cout << "Health: " << get_health() << "/" << get_max_health() << endl;
+}
+void Enemy::action(Character* target) {
+	srand(time(0));
+	int act = rand() % 100;
+
+	if (get_health() > (get_max_health() / 2)) {
+		if (act < 66) {
+			attack(target);
+		}
+		else {
+			heal();
+		}
+	}
+	else if (get_health() > (get_max_health() / 4)) {
+		if (act < 40) {
+			attack(target);
+		}
+		else {
+			heal();
+		}
+	}
+	else {
+		if (act < 20) {
+			attack(target);
+		}
+		else {
+			heal();
+		}
+	}
 }
 
 bool Enemy::picklock() {
