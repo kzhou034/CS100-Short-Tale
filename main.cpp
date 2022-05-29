@@ -1,4 +1,4 @@
-nclude <iostream>
+#include <iostream>
 #include "Character.hpp"
 #include <string>
 #include <unistd.h>
@@ -15,7 +15,7 @@ int main(){
 
     cout << "Welcome to Short Tale! The princess has been kidnapped, and there was nothing we could do to stop it!" << endl;
     sleep(1.5);
-    cout << "She has been taken by hordes of monsters, across many lands."
+    cout << "She has been taken by hordes of monsters, across many lands." << endl;
     sleep(1.5);
     cout << "You are the only hero strong enough to save her!" << endl;
     cout << endl;
@@ -103,7 +103,7 @@ int main(){
     }
     sleep(1);
     cout << endl;
-    cout << "Kevin the " << playerClass.getType() << "!" << endl;
+    cout << name << " the " << playerClass.getType() << "!" << endl;
     cout << "I entrust you with saving the princess. Please return her safely!" << endl;
 
     sleep(2);
