@@ -37,7 +37,8 @@ The "Mana Potion" class will be used to recover mana for mages.
 
 The "Health Potion" class will be used to recover health for all classes.
 
-![Inventory Composite Design Pattern](https://user-images.githubusercontent.com/101243368/168520609-b1e09649-916f-4a3d-bf36-da444a89cd7e.png)
+[UML Inventory Composite Design Pattern.pdf](https://github.com/cs100/final-project-jhu113_kzhou034_kpham130_ehoan011/files/8794274/UML.Inventory.Composite.Design.Pattern.pdf)
+
 
 Here, we used a composite design pattern to implement the entire inventory. The Inventory is interacted with by the player and will contain all of the other aspects, which are "contained" within the Inventory. The Inventory can exist without any of the following classes, by having an "empty" Inventory, but we have categorized items to exist within the Inventory and to be sorted by the type of items that they are are under the composite classes. In this way, we are able to better sort the inventory and allow item buying and selection to be a lot more manageable. This design pattern allows us to write better code because it gives us a better understanding of how the inventory to work and we can work around this pattern in consideration of how the Inventory should look like when it is fully developed.
  
