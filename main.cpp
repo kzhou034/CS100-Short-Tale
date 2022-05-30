@@ -80,36 +80,41 @@ int main(){
     answer = "";
     cin >> answer;
 
-    while(answer != "1" && answer != "2" && answer != "3"){   //re-asks if invalid answer is given
-            cout << "That doesn't seem to be a valid answer. Please try again." << endl;
-            answer = "";
-            cin >> answer;
-        }
+//    Character* playerClass;
 
     //knight class selection
     if (answer == "1") {
         cout << "I see. So you are a knight!" << endl;
-        Knight playerClass = new Knight(name, "Knight", 10, 6, 8, 6, 4);
+        playerClass = new Knight(name, "Knight", 10, 6, 8, 6, 4);
     }
     //mage class selection
-    if (answer == "2") {
+    else if (answer == "2") {
         cout << "I see. So you are a mage!" << endl;
-        Mage playerClass = new Mage(name, "Mage", 7, 8, 3, 4, 6);
+        playerClass = new Mage(name, "Mage", 7, 8, 3, 4, 6);
     }
     //rogue class selection
-    if (answer == "3") {
+    else if (answer == "3") {
         cout << "I see. So you are a rogue!" << endl;
-        Rogue playerClass = new Rogue(name, "Rogue", 6, 8, 3, 2, 8);
+        playerClass = new Rogue(name, "Rogue", 6, 8, 3, 2, 8);
+    }
+    else{
+        while(answer != "1" && answer != "2" && answer != "3"){   //re-asks if invalid answer is given
+            cout << "That doesn't seem to be a valid answer. Please try again." << endl;
+            answer = "";
+            cin >> answer;
+        }
     }
     sleep(1);
     cout << endl;
-    cout << name << " the " << playerClass.getType() << "!" << endl;
+    cout << "Kevin the " << playerClass->get_type() << "!" << endl;
     cout << "I entrust you with saving the princess. Please return her safely!" << endl;
 
     sleep(2);
 
     cout << "Stage 1: The Beginning." << endl;
-
+    
     //***********************end of beginning of the game
+    delete playerClass;
 
+    return 0;
 }
