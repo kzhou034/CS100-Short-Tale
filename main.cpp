@@ -2,7 +2,6 @@
 #include <string>
 #include <unistd.h>
 #include "Character.hpp"
-#include "Enemies.h"
 using namespace std;
 
 void PrintChapter1(){
@@ -226,6 +225,33 @@ int main(){
     string name = "";
     string answer;
 
+    Character* enemy1;
+    enemy1 = new Enemy("Monkey", "Beast", 1, 10, 3, 2, 2, 5);
+  
+    Character* enemy2;
+    enemy2 = new Enemy("Goblin", "Beast", 1, 10, 3, 2, 2, 5);
+    (*enemy2).set_level(2);
+    
+    
+    Character* enemy3;
+    enemy1 = new Enemy("Bandit", "Human", 1, 10, 3, 2, 2, 5);
+  (*enemy3).set_level(3);
+  
+    Character* enemy4;
+    enemy1 = new Enemy("Red Demon", "Demon", 1, 10, 3, 2, 2, 5);
+  (*enemy4).set_level(4);
+  
+    Character* enemy5;
+    enemy1 = new Enemy("Blue Demon", "Demon", 1, 10, 3, 2, 2, 5);
+  (*enemy5).set_level(5);
+  
+    Character* enemy6;
+    enemy1 = new Enemy("Demon Knight", "Demon", 1, 10, 3, 2, 2, 5);
+  (*enemy6).set_level(6);
+  
+    Character* enemy7;
+    enemy1 = new Enemy("Demon Lord", "Demon", 1, 10, 3, 2, 2, 5);
+  (*enemy7).set_level(7);
 
     cout << "Welcome to Short Tale! The princess has been kidnapped, and there was nothing we could do to stop it!" << endl;
     sleep(1.5);
@@ -332,4 +358,11 @@ int main(){
     PrintChapter5();
     PrintChapter6();
     delete playerClass;
+    delete enemy1;
+    delete enemy2;
+    delete enemy3;
+    delete enemy4;
+    delete enemy5;
+    delete enemy6;
+    delete enemy7;
 }
