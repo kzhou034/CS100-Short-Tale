@@ -10,16 +10,15 @@
  As a group who shares common interest in video games, understanding and developing a basic game is a great experience to have, especially in the world of programming. By choosing this project we can express that interest, and learn from it.
 
 ## Class Diagram
-Both "Player" and "Enemy" classes inherit from the "Character" class. The "Knight,""Mage," and "Rogue" classes inherit from the "Player" class, and are among the classes the player cane choose from when they start the game. 
+The "Knight,""Mage,""Rogue," and "Enemy" classes inherit from the "Character" class. 
 
-The "Enemy" class will be used to create the enemies that will appear on the different levels of the game. They will be created before the game starts.
+The "Enemy" class will be used to create the enemies that will appear on the different levels of the game. They can be different class types, like how the RPG player is able to choose between three class types when creating their player character. They will be created before the game starts. The RPG Player will not be able to create an Enemy as their player character. 
 
-The "Player" class will be used to create the player character at the start of the game. Depending on which class the player chooses, they will have different stats. Knights have balanced stats; they deal physical damage and are limited by their stamina. Mages attack with magic, but their attacks are limited by how much mana they have. They have higher magic resistance but lower physical defense. Rogues have low defense and resistance stats. They deal physical damage, but less than a knight. They trade less damage in favor of higher speed, which allows them to attack first or run away during battle. They later unlock the ability to pick locks on doors. 
+The "Knight,""Mage," and "Rogue" classes will be used to create the player character at the start of the game. Depending on which class the player chooses, they will have different player stats. Knights have balanced stats and they deal physical damage. Mages attack with magic, and their attacks deal magic damage. They have higher magic resistance but lower physical defense. Rogues have low defense and resistance stats. They deal physical damage, but less than a knight. They trade less damage in favor of higher speed, which allows them to attack first or run away during battle. They later unlock the ability to pick locks on chests. 
 
-![Updated_UML _Composite_Character drawio (1)](https://user-images.githubusercontent.com/77300057/168492580-58d385f3-576f-42be-8b36-c0c1ebb527e9.png)
+The "Knight" and "Rogue" classes both deal physical damage, meaning that the amount of damage that a foe would receive depends on the foe's defense stat. Mages deal magic damage, meaning the amount of damage a foe would receive depends on the foe's resistance stat. The same concept is applied when the player receive damage: if the enemy is of class "Knight" or "Rogue," the player receives physical damage, and the amount depends on the player's defense; and if the enemy is of the "Mage" class, the player receives magic damage, and the amount depends on the player's resistance. 
 
-
-Here, we used a composite design pattern to help implement the Enemy class. The Enemy class differs from the other three because the "Enemy" role is not a role that the player can choose when creating their character. There will be a vector that stores the enemies as Character objects, and a different enemy will be used for each level. The design pattern helps to write better code because it allows us to separate the different classes and see how they are different or similar. It also allows us to direct our focus on certain aspects of each class, such as skills or differences in character statistics.
+![UML_Character_Inheritance drawio](https://user-images.githubusercontent.com/77300057/171067345-26c92d11-c596-48e5-9c3e-54fb437d4c47.png)
  
  ## Class Diagram 2 - Composite Design Pattern
 
