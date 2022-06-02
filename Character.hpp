@@ -10,9 +10,17 @@
 using namespace std;
 
 class Character {
+    protected:
+ 		  string name;
+ 		  string type;
+ 		  int level;
+ 		  int health;
+ 		  int defense;
+ 		  int resistance;
+ 		  int speed;
     public: 
 		Character() {};
-        ~Character() {};
+      virtual ~Character() {};
 
 		virtual void set_name(string) = 0;
         virtual void set_type(string) = 0;
@@ -43,9 +51,12 @@ class Character {
         virtual int get_speed() = 0;
         virtual bool getStatus() = 0; 
         virtual int getCD() = 0;
+        virtual int getCD2() = 0;
 
         virtual void setCD() = 0;
         virtual void redCD() = 0;
+        virtual void setCD2() = 0;
+        virtual void redCD2() = 0;
         virtual void setlevel(int) = 0; 
 		    virtual void heal() = 0;
 		    virtual void atk(Character* target) = 0;
@@ -55,6 +66,12 @@ class Character {
         virtual void raiseshield() = 0;
         virtual void lowershield() = 0;
         virtual void holysmite(Character* target) = 0;
+        virtual void sneakattack(Character* target) = 0;
+        virtual void shadowshift(Character* target) = 0;
+        virtual void mindtrick(Character* target) = 0;
+        virtual void voidBlast(Character* target) = 0;
+        virtual void thunderCloud(Character* target) = 0;
+        virtual void waningMoon(Character* target) = 0;
 		    virtual bool pickLock() = 0;
       
 };
@@ -253,7 +270,17 @@ class Knight : public Character {
           }
         }; 
         //Knight can't do this
+        void setCD2(){};
+        void redCD2(){};
+        int getCD2(){return 0;};
+        void sneakattack(Character* target){};
+        void shadowshift(Character* target){};
+        void mindtrick(Character* target){};
         bool pickLock() {return false;};
+        void voidBlast(Character* target){};
+        void thunderCloud(Character* target){};
+        void waningMoon(Character* target){};
+        
 };
 
 class Mage : public Character {
@@ -272,6 +299,7 @@ class Mage : public Character {
         int speed;
 
         int skillcd;
+        int skillcd2;
         bool lockPick = false;
 
     public:
@@ -335,7 +363,20 @@ class Mage : public Character {
         int get_resistance() {return resistance;};
         int get_speed() {return speed;};
 
-        void setlevel(int) {};
+        void setlevel(int l) {
+            level = l;
+
+            max_health = 7 * pow(l, 1.5);
+            health = max_health;
+
+            attack = 8 * pow(l, 1.2);
+
+            defense = 3 * pow(l, 1.7);
+
+            resistance = 4 * pow(l, 1.5);
+
+            speed = 6 * pow(l, 1.3);
+        };
         void heal() {
             double amt;
             double mult = 0.05 * level;
@@ -355,7 +396,9 @@ class Mage : public Character {
             double realdmg1 = 75;
             double realdmg2 = 0;
             if (get_type() == "Mage") {
-                dmg -= target->get_resistance();
+                realdmg2 = (75 + target->get_resistance());
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
             }
             else {
                 realdmg2 = (75 + target->get_defense());
@@ -403,14 +446,73 @@ class Mage : public Character {
         void lowershield() {};
         void holysmite(Character* target) {};
         bool getStatus() {return false;};
-int getCD(){
+        int getCD(){
           return skillcd;
         };
         void setCD(){
-          skillcd = 3;
+          skillcd++;
         };
         void redCD(){
           skillcd--;
+        };
+        void setCD2() {
+          skillcd2++;
+        };
+        void redCD2() {
+          skillcd2--;
+        };
+        int getCD2(){
+          return skillcd2;
+        };
+        void sneakattack(Character* target) {};
+        void shadowshift(Character* target) {};
+        void mindtrick(Character* target) {};
+        void voidBlast(Character* target){
+            int dmg = get_attack() * 1.2;
+            double realdmg1 = 75;
+            double realdmg2 = 0;
+
+                realdmg2 = (75 + target->get_defense());
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
+
+            target->set_health(target->get_health() - dmg);
+            cout << "You cast a spell of the void against " << target->get_name() << "."<< endl;
+            cout << target->get_name() << " took " << dmg << " points of damage." << endl;
+        };
+        void thunderCloud(Character* target){
+          int dmg = get_attack() * 1.4;
+            double realdmg1 = 75;
+            double realdmg2 = 0;
+
+                realdmg2 = (75 + target->get_defense());
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
+            target->set_health(target->get_health() - dmg);
+            cout << "You cast a spell of thunder against " << target->get_name() << "."<< endl;
+            cout << target->get_name() << " took " << dmg << " points of damage." << endl;
+        };
+        void waningMoon(Character* target){
+            int dmg = get_attack() * 1.2;
+            int heal = 0.1 * get_max_health();
+            double realdmg1 = 75;
+            double realdmg2 = 0;
+            if (get_type() == "Mage") {
+                realdmg2 = (75 + target->get_resistance());
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
+            }
+            else {
+                realdmg2 = (75 + target->get_defense());
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
+            }
+            target->set_health(target->get_health() - dmg);
+            set_health(heal);
+          
+            cout << "You cast a spell of moon's blessing.\n" << endl;
+            cout << "You heal " << heal << " points of health." << endl; 
+            cout << target->get_name() << " took " << dmg << " points of damage." << endl;
         };
 };           
 
@@ -430,6 +532,8 @@ class Rogue : public Character {
         int resistance;
         int speed;
         int skillcd;
+        int skillcd2;
+        bool isShrouded = false;
         bool lockPick = true;
 
     public:
@@ -492,7 +596,28 @@ class Rogue : public Character {
         int get_resistance() {return resistance;};
         int get_speed() {return speed;};
 
-        void setlevel(int) {};
+        void setlevel(int l) {
+            int mod = rand() % l;
+
+            level = l;
+
+            max_health *= pow(l, 1.5);
+            max_health += mod;
+            health = max_health;
+
+            attack *= pow(l, 1.2);
+            attack += mod;
+
+            defense *= pow(l, 1.7);
+            defense -= mod;
+
+            resistance *= pow(l, 1.5);
+            resistance -= mod;
+
+            speed *= pow(l, 1.3);
+            speed += mod;
+        };
+
         void heal() {
             double amt;
             double mult = 0.05 * level;
@@ -514,7 +639,9 @@ class Rogue : public Character {
             srand(time(0));
 
             if (get_type() == "Mage") {
-                dmg -= target->get_resistance();
+                realdmg2 = (75 + target->get_resistance());
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
             }
             else {
                 realdmg2 = (75 + target->get_defense());
@@ -570,19 +697,89 @@ class Rogue : public Character {
             }
             return false;
         }; 
-        void raiseshield() {};
-        void lowershield() {};
+        void raiseshield() {
+          isShrouded = true;
+        };
+        void lowershield() {
+          isShrouded = false;
+        };
         void holysmite(Character* target) {};
-bool getStatus() {return false;}; 
-int getCD(){
+        bool getStatus() {
+          if(isShrouded){
+            return true;
+          }
+          else{
+            return false;
+          }
+          }; 
+        int getCD(){
           return skillcd;
         };
+        int getCD2(){
+          return skillcd2;
+        };
         void setCD(){
-          skillcd = 3;
+          skillcd++;
         };
         void redCD(){
           skillcd--;
         };
+        void setCD2() {
+          skillcd2++;
+        };
+        void redCD2() {
+          skillcd2--;
+        };
+        void sneakattack(Character* target) {
+            int dmg = get_attack();
+            double realdmg1 = 75;
+            double realdmg2 = 0;
+            srand(time(0));
+
+            if (get_type() == "Mage") {
+                realdmg2 = (75 + target->get_resistance());
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
+            }
+            else {
+                realdmg2 = (75 + (0.5*target->get_defense()));
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
+            }
+            
+            if (dmg < 0) {
+                dmg = 0;
+            }
+            
+            int mod = rand();
+
+            if (mod % 3 == 0) {
+                dmg += 4;
+            }
+
+            target->set_health(target->get_health() - dmg);
+            cout << "You backstab the " << target->get_name() << "."<< endl;
+            cout << target->get_name() << " took " << dmg << " points of damage." << endl;
+        };
+        void shadowshift(Character* target) {
+          cout << "You enshroud yourself in a cloud of smoke." << endl;
+          attack *= 1.1;
+          cout << "You gain bonus attack damage.\n" << endl;
+          int defense = target->get_defense();
+          defense *= .1;
+          target->add_defense(defense);
+          cout << "You reduce " << target->get_name() << "'s defense." << endl;
+        };
+        void mindtrick(Character* target) {
+          cout << "You confuse the " << target->get_name() << ".\n" << endl;
+          int defense = target->get_defense();
+          defense *= .1;
+          target->add_defense(defense);
+          cout << "You reduce " << target->get_name() << "'s defense." << endl;
+        };
+        void voidBlast(Character* target){};
+        void thunderCloud(Character* target){};
+        void waningMoon(Character* target){};
 };
 
 class Enemy : public Character {
@@ -710,7 +907,7 @@ class Enemy : public Character {
 
             level = l;
 
-            mhealth *= pow(l, 1.5);
+            mhealth *= pow(l, 2);
             mhealth += mod;
             health = mhealth;
 
@@ -731,7 +928,7 @@ class Enemy : public Character {
             double amt;
             double mult = 0.05 * level;
             if(get_level() > 7){
-              mult *= 0.2;
+              mult *= 0.10;
             }
             amt = mult * mhealth;
             amt++;
@@ -761,7 +958,9 @@ class Enemy : public Character {
             }
 
             if (get_type() == "Mage") {
-                dmg -= target->get_resistance();
+                realdmg2 = (75 + target->get_resistance());
+                realdmg1 /= realdmg2;
+                dmg *= realdmg1;
             }
             else {
                 realdmg2 = (75 + target->get_defense());
@@ -834,13 +1033,21 @@ class Enemy : public Character {
     void raiseshield() {};
     void lowershield() {};
     void holysmite(Character* target) {};
-bool getStatus() {return false;}; 
-      int getCD(){
+    bool getStatus() {return false;}; 
+      int getCD(){return 0;
         };
         void setCD(){
         };
         void redCD(){
         };
+      void setCD2() {};
+        void redCD2() {};
+        int getCD2(){return 0;};
+        void sneakattack(Character* target) {};
+        void shadowshift(Character* target) {};
+        void mindtrick(Character* target) {};
+        void voidBlast(Character* target){};
+        void thunderCloud(Character* target){};
+        void waningMoon(Character* target){};
 };
-
 #endif //__CHARACTER_HPP__
