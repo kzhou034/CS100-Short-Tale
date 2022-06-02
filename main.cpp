@@ -80,6 +80,12 @@ int main(){
     answer = "";
     cin >> answer;
 
+    while (answer != "1" && answer != "2" && answer != "3"){
+        cout << "That doesn't seem to be a valid answer. Please try again." << endl;
+	answer = "";
+	cin >> answer;
+    }
+
     Character* playerClass = new Knight(name, "Knight", 10, 6, 8, 6, 4);
 
     //knight class selection
@@ -97,13 +103,6 @@ int main(){
         cout << "I see. So you are a rogue!" << endl; 
 	delete playerClass;
 	playerClass = new Rogue(name, "Rogue", 6, 8, 3, 2, 8);
-    }
-    else{
-        while(answer != "1" && answer != "2" && answer != "3"){   //re-asks if invalid answer is given
-            cout << "That doesn't seem to be a valid answer. Please try again." << endl;
-            answer = "";
-            cin >> answer;
-        }
     }
 //    sleep(1);
     cout << endl;
