@@ -111,6 +111,7 @@ class Knight : public Character {
         };
         ~Knight() {};
 
+
         Knight(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
             name = _name;
             type = _type;
@@ -490,6 +491,7 @@ class Mage : public Character {
 
             int heal = 0.2 * get_max_health();
 
+
             double realdmg1 = 75;
             double realdmg2 = 0;
             if (get_type() == "Mage") {
@@ -505,6 +507,7 @@ class Mage : public Character {
             target->set_health(target->get_health() - dmg);
 
             set_health(get_health() + heal);
+
 
           
             cout << "You cast a spell of moon's blessing.\n" << endl;
@@ -1056,5 +1059,4 @@ class Enemy : public Character {
         void waningMoon(Character* target){};
 };
 #endif //__CHARACTER_HPP__
-
 
