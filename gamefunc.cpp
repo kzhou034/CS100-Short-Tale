@@ -489,12 +489,10 @@ void useInventory(Inventory* actionItem, Inventory* healItem, Character* player)
 
         if (answer == "1"){
             healItem->use(healItem->getLeftChild(), player);                                       //under the assumption that the Character* is named as playerClass in main
-          healItem->remove(healItem->getLeftChild());
           sleep(3);
         }
         else if (answer == "2"){
             healItem->use(healItem->getRightChild(), player);                                      //under the assumption that the Character* is named as playerClass in main
-          healItem->remove(healItem->getRightChild());
           sleep(3);
         }
         else if (answer == "3"){
@@ -1081,5 +1079,4 @@ while(answer == "1"){
   sleep(3);
   system("cls");
 }
-
 
