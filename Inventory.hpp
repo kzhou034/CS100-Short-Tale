@@ -13,7 +13,8 @@ class Inventory {
     string name;
 
     public:
-
+        Inventory(){};
+        virtual ~Inventory(){};
         virtual void setChild(Inventory* ptr) = 0;
         virtual void setChildLeft(Inventory* ptr) = 0;
         virtual void setChildRight(Inventory* ptr) = 0;
@@ -23,6 +24,7 @@ class Inventory {
         virtual string getItemName() = 0;
         virtual Inventory* getLeftChild() = 0;
         virtual Inventory* getRightChild() = 0;
+       virtual bool isEmpty() = 0;
 };
 
 class ActionItem : public Inventory {
@@ -46,7 +48,7 @@ class ActionItem : public Inventory {
 
         void setChild(Inventory* ptr){
             if (leftChild != 0 && rightChild != 0){
-                cout << "Action Items tab is full." << endl;
+                cout << "You are unable to recieve the item. Action Items tab is full." << endl;
             }
             else if (leftChild == 0){
                 setChildLeft(ptr);
@@ -58,8 +60,8 @@ class ActionItem : public Inventory {
 
         void setChildLeft(Inventory* ptr){                                                      // add items to Action Items
             if (leftChild == 0 && firstAdd == true){
-                cout << "You have opened up the Action Items tab in the Inventory!" << endl;
                 leftChild = ptr;
+                cout << leftChild->getItemName() << " has been added to the Inventory!" << endl;
                 firstAdd = false;
             }
             else if (leftChild == 0 && firstAdd == false){
@@ -73,8 +75,8 @@ class ActionItem : public Inventory {
 
         void setChildRight(Inventory* ptr){                                                     //add items to Action Items
             if (rightChild == 0 && firstAdd == true){
-                cout << "You have opened up the Action Items tab in the Inventory!" << endl;
                 rightChild = ptr;
+                cout << rightChild->getItemName() << " has been added to the Inventory!" << endl;
                 firstAdd == false;
             }
             else if (rightChild == 0 && firstAdd == false){
@@ -114,10 +116,10 @@ class ActionItem : public Inventory {
 
         void printItem(){                                                                       //outputs what is in Action Items tab and asks for user input
             if (firstAdd == true){                                                              // if action items were never added
-                cout << "The Action Items tab is empty!" << endl;
+              
             }
             else if (leftChild == 0 && rightChild == 0){                                        // if action items were added but used up
-                cout << "The Action Items tab is empty!" << endl;
+                
             }
             else if (leftChild == 0){                                                           // if there is no current left item in Action Items
                 cout << "The Action Items tab consists of:" << endl;
@@ -133,8 +135,7 @@ class ActionItem : public Inventory {
                 cout << "The Action Items tab consists of:" << endl;
                 cout << "Left slot: " << leftChild->getItemName() << endl;
                 cout << "Right slot: " << rightChild->getItemName() << endl;
-            }
-            cout << "Please press 1 to use the left item, 2 to use the right item, and 3 to exit." << endl;         // user input
+            }  
         }
         
         string getItemName(){                 //this should essentially be useless for Action Item class
@@ -148,7 +149,12 @@ class ActionItem : public Inventory {
         Inventory* getRightChild(){
             return rightChild;
         }
-
+        bool isEmpty(){
+          if(rightChild == 0 && leftChild == 0){
+            return true;
+          }
+          return false;
+        }
 };
 
 class HealItem : public Inventory {
@@ -172,7 +178,7 @@ class HealItem : public Inventory {
 
         void setChild(Inventory* ptr){
             if (leftChild != 0 && rightChild != 0){
-                cout << "Heal Items tab is full." << endl;
+                cout << "You are unable to recieve the item. Heal Items tab is full." << endl;
             }
             else if (leftChild == 0){
                 setChildLeft(ptr);
@@ -184,8 +190,8 @@ class HealItem : public Inventory {
 
         void setChildLeft(Inventory* ptr){                                                      // add items to Heal Items
             if (leftChild == 0 && firstAdd == true){
-                cout << "You have opened up the Heal Items tab in the Inventory!" << endl;
                 leftChild = ptr;
+                cout << leftChild->getItemName() << " has been added to the Inventory!" << endl;
                 firstAdd = false;
             }
             else if (leftChild == 0 && firstAdd == false){
@@ -199,8 +205,8 @@ class HealItem : public Inventory {
 
         void setChildRight(Inventory* ptr){                                                     //add items to Heal Items
             if (rightChild == 0 && firstAdd == true){
-                cout << "You have opened up the Heal Items tab in the Inventory!" << endl;
                 rightChild = ptr;
+                cout << rightChild->getItemName() << " has been added to the Inventory!" << endl;
                 firstAdd == false;
             }
             else if (rightChild == 0 && firstAdd == false){
@@ -240,10 +246,10 @@ class HealItem : public Inventory {
 
         void printItem(){                                                                       //outputs what is in Heal Items tab and asks for user input
             if (firstAdd == true){                                                              // if Heal items were never added
-                cout << "The Heal Items tab is empty!" << endl;
+               
             }
             else if (leftChild == 0 && rightChild == 0){                                        // if Heal items were added but used up
-                cout << "The Heal Items tab is empty!" << endl;
+               
             }
             else if (leftChild == 0){                                                           // if there is no current left item in Heal Items
                 cout << "The Heal Items tab consists of:" << endl;
@@ -260,7 +266,6 @@ class HealItem : public Inventory {
                 cout << "Left slot: " << leftChild->getItemName() << endl;
                 cout << "Right slot: " << rightChild->getItemName() << endl;
             }
-            cout << "Please press 1 to use the left item, 2 to use the right item, and 3 to exit." << endl;         // user input
         }
         
         string getItemName(){                 //this should essentially be useless for Heal Item class
@@ -273,6 +278,12 @@ class HealItem : public Inventory {
 
         Inventory* getRightChild(){
             return rightChild;
+        }
+        bool isEmpty(){
+          if(rightChild == 0 && leftChild == 0){
+            return true;
+          }
+          return false;
         }
 };
 
@@ -300,10 +311,11 @@ class SmokeBomb : public Inventory {
 
         }
         void use(Inventory* ptr, Character* playerClass){                                                           //right now, use for SmokeBomb is just a cout statement            
-            cout << "You have raised your chances of escape!" << endl;
+            cout << "You have increased your mobility and raised your chance of escape!" << endl;
+            playerClass->add_speed(5);
         }
         void printItem(){
-            cout << "Smoke bomb: allows the user to run away more effectively." << endl;
+            cout << "Smoke bomb: gives user a faster speed and raises chance of escaping." << endl;
         }
         string getItemName(){
             return name;
@@ -316,6 +328,9 @@ class SmokeBomb : public Inventory {
 	Inventory* getRightChild(){
 
 	}
+bool isEmpty(){
+          return false;
+        }
 
 };
 
@@ -344,11 +359,11 @@ class StrengthPotion : public Inventory {
         }
         void use(Inventory* ptr, Character* playerClass){                                                                       
             cout << "You have drunk a Strength Potion! " << endl;
-            cout << "Your attack stat has been raised by 2 points." << endl;
-            playerClass->set_attack(playerClass->get_attack() + 2);
+            cout << "Your attack stat has been raised by 5%." << endl;
+            playerClass->set_attack(playerClass->get_attack() * 1.05);
         }
         void printItem(){
-            cout << "Strength Potion: allows the user to raise their attack by 2 points for the rest of combat." << endl;
+            cout << "Strength Potion: allows the user to raise their attack by 5% permanently." << endl;
         }
         string getItemName(){
             return name;
@@ -361,6 +376,9 @@ class StrengthPotion : public Inventory {
 	Inventory* getRightChild(){
 
 	}
+bool isEmpty(){
+          return false;
+        }
 };
 
 class HealthPotion : public Inventory {                                                            
@@ -388,7 +406,7 @@ class HealthPotion : public Inventory {
         }
         void use(Inventory* ptr, Character* playerClass){                                              
             cout << "You have drunk a Health Potion! " << endl;
-//            playerClass->heal();
+            playerClass->heal();
         }
         void printItem(){
             cout << "Heal Potion: Allows the user to recover health." << endl;
@@ -404,8 +422,12 @@ class HealthPotion : public Inventory {
 	Inventory* getRightChild(){
 
 	}
+bool isEmpty(){
+          return false;
+        }
 };
 
 
 
 #endif
+

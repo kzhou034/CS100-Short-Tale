@@ -23,7 +23,6 @@ class Character {
       virtual ~Character() {};
 
 		virtual void set_name(string) = 0;
-
         virtual void set_type(string) = 0;
         virtual void set_level(int) = 0;
         virtual void set_health(int) = 0;
@@ -111,6 +110,7 @@ class Knight : public Character {
             speed = -1;
         };
         ~Knight() {};
+
         Knight(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
             name = _name;
             type = _type;
@@ -155,25 +155,18 @@ class Knight : public Character {
         int get_speed() {return speed;};
 
         void setlevel(int l) {
-            int mod = rand() % l;
-
             level = l;
 
-            max_health *= pow(l, 1.5);
-            max_health += mod;
+            max_health = 7 * pow(l, 1.5);
             health = max_health;
 
-            attack *= pow(l, 1.2);
-            attack += mod;
+            attack = 8 * pow(l, 1.2);
 
-            defense *= pow(l, 1.7);
-            defense -= mod;
+            defense = 3 * pow(l, 1.7);
 
-            resistance *= pow(l, 1.5);
-            resistance -= mod;
+            resistance = 4 * pow(l, 1.5);
 
-            speed *= pow(l, 1.3);
-            speed += mod;
+            speed = 6 * pow(l, 1.3);
         };
         void heal() {
             double amt;
@@ -321,7 +314,6 @@ class Mage : public Character {
         ~Mage() {};
 
         Mage(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) : Character() {
-
             name = _name;
             type = _type;
 
@@ -495,7 +487,9 @@ class Mage : public Character {
         };
         void waningMoon(Character* target){
             int dmg = get_attack() * 1.2;
-            int heal = 0.1 * get_max_health();
+
+            int heal = 0.2 * get_max_health();
+
             double realdmg1 = 75;
             double realdmg2 = 0;
             if (get_type() == "Mage") {
@@ -509,7 +503,9 @@ class Mage : public Character {
                 dmg *= realdmg1;
             }
             target->set_health(target->get_health() - dmg);
-            set_health(heal);
+
+            set_health(get_health() + heal);
+
           
             cout << "You cast a spell of moon's blessing.\n" << endl;
             cout << "You heal " << heal << " points of health." << endl; 
@@ -686,7 +682,9 @@ class Rogue : public Character {
         void action(Character* target) {};
 
         bool pickLock() {
-            if (level == 2 && type == "Rogue" && max_lockpicks > 0) {
+
+            if (max_lockpicks > 0) {
+
                 lockPick = true;
                 max_lockpicks--;
                 return true;
@@ -907,7 +905,8 @@ class Enemy : public Character {
             mhealth += mod;
             health = mhealth;
 
-            attack *= pow(l, 1.6);
+            attack *= pow(l, 1.2);
+
             attack += mod;
 
             defense *= pow(l, 1.7);
@@ -922,10 +921,15 @@ class Enemy : public Character {
         
         void heal() {
             double amt;
-            double mult = 0.05 * level;
-            if(get_level() > 7){
-              mult *= 0.10;
+
+            double mult = level;
+            if(get_level() > 4){
+              mult *= 0.035;
             }
+          else{
+            mult *= 0.05;
+          }
+
             amt = mult * mhealth;
             amt++;
 
@@ -935,7 +939,10 @@ class Enemy : public Character {
             else {
                 health += amt;
             }
-            cout << "The " << get_name() << " healed for " << amt << "." << endl;
+
+            int val = amt;
+            cout << "The " << get_name() << " healed for " << val << "." << endl;
+
         };
 
         void atk(Character* target) {
@@ -1008,7 +1015,9 @@ class Enemy : public Character {
                 }
             }
             else if (get_health() > (get_max_health() / 4)) {
-                if (act < 66) {
+
+                if (act < 70) {
+
                     atk(target);
                 }
                 else {
@@ -1047,4 +1056,5 @@ class Enemy : public Character {
         void waningMoon(Character* target){};
 };
 #endif //__CHARACTER_HPP__
+
 
