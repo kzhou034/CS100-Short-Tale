@@ -3,13 +3,12 @@
 #include <unistd.h>
 #include "Character.hpp"
 #include "gamefunc.h"
-#include "Inventory.hpp"
 using namespace std;
 
 void knightSkills(Character* player, Character* enemy){
   bool isshieldraised = player->getStatus();
   string answer;
-  system("clear");
+  system("cls");
   cout << "Available Skills: " << endl;
   cout << "1) Basic Attack" << endl;
   if(!isshieldraised){
@@ -31,7 +30,7 @@ void knightSkills(Character* player, Character* enemy){
   while(answer != "1" && answer != "2" && answer != "3"){   
       cout << "\nThat doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       if(!isshieldraised){
@@ -51,9 +50,9 @@ void knightSkills(Character* player, Character* enemy){
       }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
   }
-    system("clear");
+    system("cls");
     if(answer == "3"){
       if(player->getCD() == 0){
         
@@ -79,7 +78,7 @@ void knightSkills(Character* player, Character* enemy){
           }
           answer = "";
           cin >> answer;
-          system("clear");
+          system("cls");
         }
       }
     }
@@ -106,7 +105,7 @@ void knightSkills(Character* player, Character* enemy){
 void rogueSkills(Character* player, Character* enemy){
   bool isShrouded = player->getStatus();
   string answer;
-  system("clear");
+  system("cls");
   cout << "Available Skills: " << endl;
   cout << "1) Basic Attack" << endl;
   if(player->getCD() == 0){
@@ -117,7 +116,7 @@ void rogueSkills(Character* player, Character* enemy){
     cout << "2) Sneak Attack " << "(Cooldown of " << player->getCD()  << " turn/s)."<<endl;
     cout << "        Deals an attack that ignores 50% of the enemy's armor." << endl;
   }
-  if(player->get_level() > 5){
+  if(player->get_level() >= 5){
     if(player->getCD2() == 0){
       cout << "3) Smoke Cloud " << endl;
       cout << "        Gain permanent attack damage, and reduce enemy defense permanently." << endl;
@@ -141,7 +140,7 @@ void rogueSkills(Character* player, Character* enemy){
   while(answer != "1" && answer != "2" && answer != "3"){   
       cout << "\nThat doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       if(player->getCD() == 0){
@@ -152,7 +151,7 @@ void rogueSkills(Character* player, Character* enemy){
         cout << "2) Sneak Attack " << "(Cooldown of " << player->getCD()  << " turn/s)."<<endl;
         cout << "        Deals an attack that ignores 50% of the enemy's armor." << endl;
       }
-      if(player->get_level() > 5){
+      if(player->get_level() >= 5){
         if(player->getCD2() == 0){
           cout << "3) Smoke Cloud " << endl;
           cout << "        Gain permanent attack damage, and reduce enemy defense permanently." << endl;
@@ -174,18 +173,18 @@ void rogueSkills(Character* player, Character* enemy){
     }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
   }
-    system("clear");
+    system("cls");
 
   if(player->getCD() != 0 && player->getCD2() == 0){
     while(answer != "1" && answer != "3"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
-      if(player->get_level() > 5){
+      if(player->get_level() >= 5){
         cout << "3) Smoke Cloud " << endl;
         cout << "        Gain permanent attack damage, and reduce enemy defense permanently." << endl;
       }
@@ -195,7 +194,7 @@ void rogueSkills(Character* player, Character* enemy){
       }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
 
@@ -203,27 +202,27 @@ void rogueSkills(Character* player, Character* enemy){
     while(answer != "1"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
   if(player->getCD() == 0 && player->getCD2() != 0){
     while(answer != "1" && answer != "2"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       cout << "2) Sneak Attack" << endl;
       cout << "        Deals an attack that ignores 50% of the enemy's armor." << endl;
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
 
@@ -240,7 +239,7 @@ void rogueSkills(Character* player, Character* enemy){
     sleep(2);
   }
   if(answer == "3"){
-    if(player->get_level() > 5){
+    if(player->get_level() >= 5){
       player->shadowshift(enemy);
       player->setCD2();
       player->setCD2();
@@ -257,7 +256,7 @@ void rogueSkills(Character* player, Character* enemy){
 
 void mageSkills(Character* player, Character* enemy){
   string answer;
-  system("clear");
+  system("cls");
   cout << "Available Skills: " << endl;
   cout << "1) Basic Attack" << endl;
   if(player->getCD() == 0){
@@ -268,7 +267,7 @@ void mageSkills(Character* player, Character* enemy){
     cout << "2) Thunder Cloud " << "(Cooldown of " << player->getCD()  << " turn/s)."<<endl;
     cout << "        Cast a spell of thunder." << endl;
   }
-  if(player->get_level() > 5){
+  if(player->get_level() >= 5){
     if(player->getCD2() == 0){
       cout << "3) Waning Moon " << endl;
       cout << "        Cast a spell of the moonlight, and heal for 20% of max health." << endl;
@@ -292,7 +291,7 @@ void mageSkills(Character* player, Character* enemy){
   while(answer != "1" && answer != "2" && answer != "3"){   
       cout << "\nThat doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       if(player->getCD() == 0){
@@ -303,7 +302,7 @@ void mageSkills(Character* player, Character* enemy){
     cout << "2) Thunder Cloud " << "(Cooldown of " << player->getCD()  << " turn/s)."<<endl;
     cout << "        Cast a spell of thunder." << endl;
   }
-  if(player->get_level() > 5){
+  if(player->get_level() >= 5){
     if(player->getCD2() == 0){
       cout << "3) Waning Moon " << endl;
       cout << "        Cast a spell of the moonlight, and heal for 20% of max health." << endl;
@@ -325,18 +324,18 @@ void mageSkills(Character* player, Character* enemy){
   }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
   }
-    system("clear");
+    system("cls");
 
   if(player->getCD() != 0 && player->getCD2() == 0){
     while(answer != "1" && answer != "3"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
-      if(player->get_level() > 5){
+      if(player->get_level() >= 5){
         cout << "3) Waning Moon " << endl;
         cout << "        Cast a spell of the moonlight, and heal for 20% of max health." << endl;
       }
@@ -346,7 +345,7 @@ void mageSkills(Character* player, Character* enemy){
       }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
 
@@ -354,27 +353,27 @@ void mageSkills(Character* player, Character* enemy){
     while(answer != "1"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
   if(player->getCD() == 0 && player->getCD2() != 0){
     while(answer != "1" && answer != "2"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       cout << "2) Thunder Cloud" << endl;
       cout << "        Cast a spell of thunder." << endl;
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
 
@@ -391,7 +390,7 @@ void mageSkills(Character* player, Character* enemy){
     sleep(2);
   }
   if(answer == "3"){
-    if(player->get_level() > 5){
+    if(player->get_level() >= 5){
       player->waningMoon(enemy);
       player->setCD2();
       player->setCD2();
@@ -406,13 +405,113 @@ void mageSkills(Character* player, Character* enemy){
   }
 }
 
-bool inCombat(Character* player, Character* enemy){
+void useInventory(Inventory* actionItem, Inventory* healItem, Character* player){
+    string answer = "";
+    cout << "What items would you like to use?" << endl;
+    cout << endl;
+    cout << "Options:" << endl;
+    cout << "1. Action Items" << endl;
+    cout << "2. Heal Items" << endl;
+    cout << "3. Exit" << endl;
+    cout << endl;
+    cout << "Please enter 1 or 2, or 3 to exit." << endl;
+
+    answer = "";
+    cin >> answer;
+    system("cls");
+    while(answer != "1" && answer != "2" && answer != "3"){
+        cout << "That doesn't seem to be a valid answer. Please press 1 or 2, or 3 to exit.\n" << endl;
+        cout << "What items would you like to use?" << endl;
+    cout << endl;
+    cout << "Options:" << endl;
+    cout << "1. Action Items" << endl;
+    cout << "2. Heal Items" << endl;
+    cout << "3. Exit" << endl;
+    cout << endl;
+    cout << "Please enter 1 or 2, or 3 to exit." << endl;
+        answer = "";
+        cin >> answer;
+      system("cls");
+    }
+
+    if (answer == "1"){
+        if(actionItem->isEmpty()){
+          cout << "Action Items are empty. Please try another option, or press 3 to exit." << endl;
+          useInventory(actionItem, healItem, player);
+          return;
+        }
+        else{
+          actionItem->printItem();
+      
+        cout << "Please press 1 to use the left item, 2 to use the right item, and 3 to exit." << endl; 
+        answer = "";
+        cin >> answer;
+
+        while(answer != "1" && answer != "2" && answer != "3"){
+           cout << "That doesn't seem to be a valid answer. Please press 1, 2, or 3." << endl;
+           answer = "";
+           cin >> answer;
+        }
+
+        if (answer == "1"){
+            actionItem->use(actionItem->getLeftChild(), player);                                       //under the assumption that the Character* is named as playerClass in main
+          sleep(3);
+        }
+        else if (answer == "2"){
+            actionItem->use(actionItem->getRightChild(), player);                                      //under the assumption that the Character* is named as playerClass in main
+          sleep(3);
+        }
+        else if (answer == "3"){
+            return;
+        }
+        }
+
+    }
+
+    if (answer == "2"){
+        if(healItem->isEmpty()){
+          cout << "Healing Items are empty. Please try another option, or press 3 to exit." << endl;
+          useInventory(actionItem, healItem, player);
+          return;
+        }
+        else{
+          healItem->printItem();
+      
+        cout << "Please press 1 to use the left item, 2 to use the right item, and 3 to exit." << endl; 
+        answer = "";
+        cin >> answer;
+
+        while(answer != "1" && answer != "2" && answer != "3"){
+           cout << "That doesn't seem to be a valid answer. Please press 1, 2, or 3." << endl;
+           answer = "";
+           cin >> answer;
+        }
+
+        if (answer == "1"){
+            healItem->use(healItem->getLeftChild(), player);                                       //under the assumption that the Character* is named as playerClass in main
+          healItem->remove(healItem->getLeftChild());
+          sleep(3);
+        }
+        else if (answer == "2"){
+            healItem->use(healItem->getRightChild(), player);                                      //under the assumption that the Character* is named as playerClass in main
+          healItem->remove(healItem->getRightChild());
+          sleep(3);
+        }
+        else if (answer == "3"){
+            return;
+        }
+        }
+}
+  }
+
+bool inCombat(Inventory* actionItems, Inventory* healItems, Character* player, Character* enemy){
   int turnNum = 1;
   bool openedstats = false;
   bool isVictory = true;
   string answer;
   while(isVictory){
     if(player->get_health() <= 0){
+      player->set_health(player->get_max_health());
       return false;
     }
     cout << "[Turn " << turnNum << "]\n" << endl;
@@ -437,7 +536,7 @@ bool inCombat(Character* player, Character* enemy){
     while(answer != "1" && answer != "2" && answer != "3" && answer != "4" && answer != "5"){   
         cout << "\nThat doesn't seem to be a valid answer. Please try again.\n" << endl;
         sleep(2);
-        system("clear");
+        system("cls");
         cout << "[Turn " << turnNum << "]\n" << endl;
         cout << "Name: " << enemy->get_name() << "\nType: " << enemy->get_type() << "\nHealth: " << enemy->get_health() << endl << endl << endl;
         cout << "You currently have " << player->get_health() << " health." << endl;
@@ -464,7 +563,7 @@ bool inCombat(Character* player, Character* enemy){
           }
           cout << "Press any key to continue." << endl;
           cin >> answer;
-          system("clear");
+          system("cls");
         }
     }
     else if (answer == "2") {
@@ -488,17 +587,21 @@ bool inCombat(Character* player, Character* enemy){
           }
           cout << "Press any key to continue." << endl;
           cin >> answer;
-          system("clear");
+          system("cls");
         }
     }
       
     else if (answer == "3") {
-        cout << "You open inventory" << endl;
-      
-        system("clear");
+        system("cls");
+        cout << "You open inventory.\n" << endl;
+        useInventory(actionItems, healItems, player);
+        turnNum--;
+        player->setCD();
+        openedstats = true;
+        system("cls");
     }
     else if (answer == "4") {
-        system("clear");
+        system("cls");
         cout << "Name: " << player->get_name() << endl;
         cout << "Class: " << player->get_type() << endl;
         cout << "Level: " << player->get_level() << endl;
@@ -511,13 +614,19 @@ bool inCombat(Character* player, Character* enemy){
         turnNum--;
         player->setCD();
         openedstats = true;
-        system("clear");
+        system("cls");
     }
 
     else if (answer == "5") {
         cout << "You try to run away." << endl;
-        system("clear");
-        return false;
+        if(player->get_speed() > enemy->get_speed()){
+          system("cls");
+          return false;
+        }
+        else{
+          cout << "You failed to run away." << endl;
+          system("cls");
+        }
     }
     turnNum++;
     if(player->getCD() != 0){
@@ -531,7 +640,7 @@ bool inCombat(Character* player, Character* enemy){
 }
 
 
-void PrintChapter1(Character* player, Character* enemy){
+void PrintChapter1(Inventory* actionItems, Inventory* healItems, Character* player, Character* enemy){
   cout << "Stage 1: The Beginning." << endl;
     string answer = "";
 
@@ -541,8 +650,8 @@ void PrintChapter1(Character* player, Character* enemy){
     sleep(1.5);
     cout << "Press any key to continue." << endl;
     cin >> answer;
-    
-    bool isVictory = inCombat(player, enemy);
+    system("cls");
+    bool isVictory = inCombat(actionItems, healItems, player, enemy);
     if(isVictory){
       cout <<  "You defeat the monkey." << endl;
     }
@@ -550,17 +659,19 @@ void PrintChapter1(Character* player, Character* enemy){
       cout << "You are defeated by the monkey." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      system("clear");
-      PrintChapter1(player, enemy);
+      system("cls");
+      player->set_health(player->get_max_health());
+      enemy->set_health(enemy->get_max_health());
+      PrintChapter1(actionItems, healItems, player, enemy);
     }
     
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
-void PrintChapter2(Character* player, Character* enemy){
+void PrintChapter2(Inventory* actionItems, Inventory* healItems, Character* player, Character* enemy){
   cout << "Stage 2" << endl;
-  string answer;
+  string answer = "";
 
     cout << "With your first victory in hand, you continue down the long mountain roads." << endl;
     sleep(3);
@@ -570,38 +681,30 @@ void PrintChapter2(Character* player, Character* enemy){
     sleep(3);
     cout << "You step in to help the knight." << endl;
     sleep(3);
-
-    bool isVictory = inCombat(player, enemy);
+    cout << "Press any key to continue." << endl;
+    cin >> answer;
+    system("cls");
+    bool isVictory = inCombat(actionItems, healItems, player, enemy);
     if(isVictory){
       cout <<  "You defeat the goblin." << endl;
     }
     else{
       cout << "You are defeated by the goblin." << endl;
-      PrintChapter2(player, enemy);
+      player->set_health(player->get_max_health());
+      enemy->set_health(enemy->get_max_health());
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      system("clear");
+      system("cls");
+      PrintChapter2(actionItems, healItems, player, enemy);
     }
 
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
-void PrintChapter3(Character* player, Character* enemy){
+void PrintChapter3(Inventory* actionItems, Inventory* healItems, Inventory* healthPotion, Character* player, Character* enemy){
   cout << "Stage 3" << endl;
-    string answer;
-
-    cout << "The knight greets you in thanks, telling you that he had been separated from his patrol group." << endl;
-    sleep(3);
-    cout << "He explains the increase in monster activity has demanded more frequent and thorough patrols through the area. " << endl;
-    sleep(3);
-    cout << "He gives his thanks again, and you go on your own ways..\n" << endl;
-    sleep(3);
-    cout << "Past the trees, you find a small town with a traveling merchant." << endl;
-
-    sleep(3);
-    cout << "You thank the merchant, and continue on your way." << endl;
-    sleep(3);
+    string answer = "";
     cout << "At the edge of the town, you hear a small commotion in an alleyway. Do you want to investigate?" << endl;
     cout << "Press 1 to investigate." << endl;
     cout << "Press 2 to continue on your way." << endl;
@@ -618,7 +721,23 @@ void PrintChapter3(Character* player, Character* enemy){
       cout << "Press 2 to continue on your way." << endl;
       sleep(1);
       cin >> answer;
-
+      if(answer == "1"){
+        if(player->get_type() != "Rogue"){
+          cout << "You do not possess the skill to lockpick."<< endl;
+          cout << "Hint: Only Rogues can lockpick!"<< endl;
+        }
+        else{
+          if(player->pickLock()){
+            cout << "You successfully pick the lock."<< endl;
+            healItems->setChild(healthPotion);
+            cout << endl;
+          }
+          else if(!player->pickLock()){
+            cout << "You failed to pick the lock." << endl;
+            cout << "Hint: You can only lock pick twice!" << endl;
+          }
+        }
+      }
 
       cout << "Setting down the chest, you make your way out of the alley and past the town." << endl;
     }
@@ -628,8 +747,10 @@ void PrintChapter3(Character* player, Character* enemy){
     sleep(3);
     cout << "Walking through the roads, you are suddenly approached by a group of bandits." << endl;
     sleep(3);
-
-    bool isVictory = inCombat(player, enemy);
+    cout << "Press any key to continue." << endl;
+    cin >> answer;
+system("cls");
+    bool isVictory = inCombat(actionItems, healItems, player, enemy);
     if(isVictory){
       cout <<  "You defeat the bandits." << endl;
     }
@@ -637,17 +758,19 @@ void PrintChapter3(Character* player, Character* enemy){
       cout << "You are defeated by the bandits." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      system("clear");
-      PrintChapter3(player, enemy);
+      system("cls");
+      player->set_health(player->get_max_health());
+      enemy->set_health(enemy->get_max_health());
+      PrintChapter3(actionItems, healItems, healthPotion, player, enemy);
     }
 
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
-void PrintChapter4(Character* player, Character* enemy, Character* enemy2){
+void PrintChapter4(Inventory* actionItems, Inventory* healItems, Character* player, Character* enemy, Character* enemy2){
   cout << "Stage 4" << endl;
-  string answer;
+  string answer = "";
 
     cout << "You resume on your journey after defeating the bandits. " << endl;
     sleep(3);
@@ -655,9 +778,10 @@ void PrintChapter4(Character* player, Character* enemy, Character* enemy2){
     sleep(3);
     cout << "The shrieks become louder as you traverse through the woods. In a small clearing, you find two demons waiting." << endl;
     sleep(3);
-
-
-    bool isVictory = inCombat(player, enemy);
+    cout << "Press any key to continue." << endl;
+    cin >> answer;
+    system("cls");
+    bool isVictory = inCombat(actionItems, healItems, player, enemy);
     if(isVictory){
       cout <<  "You defeat the first demon." << endl;
     }
@@ -665,11 +789,12 @@ void PrintChapter4(Character* player, Character* enemy, Character* enemy2){
       cout << "You are defeated by the first demon." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      PrintChapter4(player, enemy, enemy2);
-      system("clear");
+      enemy->set_health(enemy->get_max_health());
+      system("cls");
+      PrintChapter4(actionItems, healItems, player, enemy, enemy2);
     }
 
-    isVictory = inCombat(player, enemy2);
+    isVictory = inCombat(actionItems, healItems, player, enemy);
     if(isVictory){
       cout <<  "You defeat the second demon." << endl;
     }
@@ -677,30 +802,33 @@ void PrintChapter4(Character* player, Character* enemy, Character* enemy2){
       cout << "You are defeated by the second demon." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      PrintChapter4(player, enemy, enemy2);
-      system("clear");
+      player->set_health(player->get_max_health());
+      enemy->set_health(enemy->get_max_health());
+      system("cls");
+      PrintChapter4(actionItems, healItems, player, enemy, enemy2);
     }
 
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
-void PrintChapter5(Character* player, Character* enemy){
+void PrintChapter5(Inventory* actionItems, Inventory* healItems, Character* player, Character* enemy){
     cout << "Stage 5" << endl;
-    string answer;
+    string answer = "";
 
     cout << "At the edge of the forest stands overbearing sight of a dark castle. " << endl;
     sleep(3);
     cout << "The same castle that the princess is being held in." << endl;
     sleep(3);
-    cout << "Making your way up the castle stairs, you find the entrance guarded by a demon knight" << endl;
+    cout << "Making your way up the castle stairs, you find the entrance guarded by a demon knight." << endl;
     sleep(3);
-    cout << "Upon seeing you, the demon knight shouts, and charges at you" << endl;
+    cout << "Upon seeing you, the demon knight shouts, and charges at you." << endl;
     sleep(3);
-
+    cout << "Press any key to continue." << endl;
+    cin >> answer;
   
-
-    bool isVictory = inCombat(player, enemy);
+system("cls");
+    bool isVictory = inCombat(actionItems, healItems, player, enemy);
     if(isVictory){
       cout << "You defeat the demon knight." << endl;
     }
@@ -708,19 +836,21 @@ void PrintChapter5(Character* player, Character* enemy){
       cout << "You are defeated by the demon knight." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      PrintChapter5(player, enemy);
-      system("clear");
+      player->set_health(player->get_max_health());
+      enemy->set_health(enemy->get_max_health());
+      system("cls");
+      PrintChapter5(actionItems, healItems, player, enemy);
     }
 
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
-void PrintChapter6(Character* player, Character* enemy){
+void PrintChapter6(Inventory* actionItems, Inventory* healItems, Inventory* smokeBomb, Character* player, Character* enemy){
     cout << "Stage 6" << endl;
-    string answer;
+    string answer = "";
 
-    cout << "Upon defeating the demon knight, you enter the now defenseless castle gate." << endl;
+    cout << "With the demon knight defeated, you enter the now defenseless castle gate." << endl;
     sleep(3);
     cout << "You carefully traverse the long hallway before you, and find a small chest a top a wooden stand. Do you want to lockpick?" << endl;
     sleep(3);
@@ -729,9 +859,25 @@ void PrintChapter6(Character* player, Character* enemy){
       cout << "Press 2 to continue on your way." << endl;
       sleep(1);
       cin >> answer;
+      if(answer == "1"){
+        if(player->get_type() != "Rogue"){
+          cout << "\nYou do not possess the skill to lockpick."<< endl;
+          cout << "Hint: Only Rogues can lockpick!\n"<< endl;
+        }
+        else{
+          if(player->pickLock()){
+            cout << "\nYou successfully pick the lock."<< endl;
+            actionItems->setChild(smokeBomb);
+            cout << endl;
+          }
+          else{
+            cout << "\nYou failed to pick the lock." << endl;
+            cout << "Hint: You can only lock pick twice!\n" << endl;
+          }
+        }
+      }
 
-
-    cout << "Setting down the chest, you continue on your path down the hallway." << endl;
+    cout << "\nSetting down the chest, you continue on your path down the hallway." << endl;
     sleep(3);
     cout << "At the end of the hallway, you find stairs, covered in red carpet." << endl;
     sleep(3);
@@ -741,19 +887,22 @@ void PrintChapter6(Character* player, Character* enemy){
     sleep(3);
     cout << "In a trance to save the princess, you raise your sword and challenge the Demon Lord." << endl;
     sleep(3);
-
+    cout << "Press any key to continue." << endl;
+    cin >> answer;
   
-
-    bool isVictory = inCombat(player, enemy);
+system("cls");
+    bool isVictory = inCombat(actionItems, healItems, player, enemy);
     if(isVictory){
       cout << "You defeat the demon lord." << endl;
     }
     else{
       cout << "You are defeated by the demon lord." << endl;
-      cout << "You are defeated by the demon knight." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      PrintChapter6(player, enemy);
+      system("cls");
+      player->set_health(player->get_max_health());
+      enemy->set_health(enemy->get_max_health());
+      PrintChapter6(actionItems, healItems, smokeBomb, player, enemy);
     }
 
 
@@ -765,3 +914,142 @@ void PrintChapter6(Character* player, Character* enemy){
     cout << "The End." << endl;
     sleep(10);
 }
+
+void printShop1(int gold, Inventory* actionItem, Inventory* healItem, Inventory* smokeBomb, Inventory* strengthPotion, Inventory* healthPotion){
+  string answer = "";
+  cout << "The knight greets you in thanks, telling you that he had been separated from his patrol group." << endl;
+    sleep(3);
+    cout << "He explains the increase in monster activity has demanded more frequent and thorough patrols through the area. " << endl;
+    sleep(3);
+    cout << "He gives his thanks again, and you go on your own ways..\n" << endl;
+    sleep(3);
+    cout << "Past the trees, you find a small town with a traveling merchant." << endl;
+    cout << "Press any key to speak to the merchant" << endl;
+    cin >> answer;
+    system("cls");
+    answer = "1";
+while(answer == "1"){
+    cout << "Shop:              Current Gold: " << gold << " gold" << endl;
+    cout << "1. Smoke Bomb-----------x1, 50 gold" << endl;
+    cout << "2. Health Potion--------x1, 50 gold" << endl;
+    cout << "3. To exit shop. " << endl;
+    cout << "Please type the respective number in order to buy the item, or 3 to exit shop." << endl;
+
+  answer = "";
+  cin >> answer;
+
+  while(answer != "1" && answer != "2" && answer != "3"){
+      cout << "That doesn't seem to be a valid answer. Please press 1 or 2, or 3 to exit shop." << endl;
+      answer = "";
+      cin >> answer;
+      system("cls");
+  } 
+
+  if (answer == "1"){
+     actionItem->setChild(smokeBomb);
+     gold -=50;
+  }
+
+  if (answer == "2"){
+     healItem->setChild(healthPotion);
+    gold -=50;
+  }
+  
+  if (answer == "3"){
+  }
+  else{
+  cout << endl;
+  actionItem->printItem();
+  cout << endl;
+  healItem->printItem();
+  cout << endl;
+  cout << "Would you like to continue shopping? (Please press 1 for Yes or 2 for No.)" << endl;
+
+  answer = "";
+  cin >> answer;
+  system("cls");
+  while(answer != "1" && answer != "2"){
+    cout << "That doesn't seem to be a valid answer. Please press 1 for Yes and 2 for No." << endl;
+    answer = "";
+    cin >> answer;
+  }
+  }  
+  }
+  cout << "You thank the merchant, and continue on your way." << endl;
+  cout << "Press any key to continue." << endl;
+  cin >> answer;
+  sleep(3);
+  system("cls");
+}
+
+void printShop2(int gold, Inventory* actionItem, Inventory* healItem, Inventory* smokeBomb, Inventory* strengthPotion, Inventory* healthPotion){
+  string answer = "";
+  cout << "You hear a faint whisper in the shadows, and move to investigate." << endl;
+    sleep(3);
+    cout << "A terrified trader seemed to have lost his way." << endl;
+    sleep(3);
+    cout << "You show him the way to safety, and in exchange he offers you wares for discount..\n" << endl;
+    sleep(3);
+    cout << "Press any key to look at his wares." << endl;
+    cin >> answer;
+    system("cls");
+    answer = "1";
+while(answer == "1"){
+    cout << "Shop:              Current Gold: " << gold << " gold" << endl;
+    cout << "1. Smoke Bomb-----------x1, 25 gold" << endl;
+    cout << "2. Health Potion--------x1, 25 gold" << endl;
+    cout << "3. Strength Potion------x1, 50 gold" << endl;
+    cout << "4. To exit shop. " << endl;
+    cout << "Please type the respective number in order to buy the item, or 4 to exit shop." << endl;
+
+  answer = "";
+  cin >> answer;
+
+  while(answer != "1" && answer != "2" && answer != "3"){
+      cout << "That doesn't seem to be a valid answer. Please press 1 or 2, or 3 to exit shop." << endl;
+      answer = "";
+      cin >> answer;
+      system("cls");
+  } 
+
+  if (answer == "1"){
+     actionItem->setChild(smokeBomb);
+     gold -=25;
+  }
+
+  if (answer == "2"){
+     healItem->setChild(healthPotion);
+    gold -=25;
+  }
+  if (answer == "3"){
+     healItem->setChild(strengthPotion);
+    gold -=50;
+  }
+  
+  if (answer == "4"){
+  }
+  else{
+  cout << endl;
+  actionItem->printItem();
+  cout << endl;
+  healItem->printItem();
+  cout << endl;
+  cout << "Would you like to continue shopping? (Please press 1 for Yes or 2 for No.)" << endl;
+
+  answer = "";
+  cin >> answer;
+  system("cls");
+  while(answer != "1" && answer != "2"){
+    cout << "That doesn't seem to be a valid answer. Please press 1 for Yes and 2 for No." << endl;
+    answer = "";
+    cin >> answer;
+  }
+  }  
+  }
+  cout << "You thank the merchant, and continue on your way." << endl;
+  cout << "Press any key to continue." << endl;
+  cin >> answer;
+  sleep(3);
+  system("cls");
+}
+
