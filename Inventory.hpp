@@ -2,7 +2,7 @@
 #define __INVENTORY_HPP__
 #include <iostream>
 #include <string>
-#include "Enemy.cpp"
+//#include "Enemy.cpp"
 #include "Character.hpp"
 using namespace std;
 
@@ -14,27 +14,29 @@ class Inventory {
 
     public:
 
+        virtual void setChild(Inventory* ptr) = 0;
         virtual void setChildLeft(Inventory* ptr) = 0;
         virtual void setChildRight(Inventory* ptr) = 0;
         virtual void remove(Inventory* ptr) = 0;
         virtual void use(Inventory* ptr, Character* playerClass) = 0;
         virtual void printItem() = 0;
         virtual string getItemName() = 0;
-
+        virtual Inventory* getLeftChild() = 0;
+        virtual Inventory* getRightChild() = 0;
 };
 
 class ActionItem : public Inventory {
 
     private:
 
-        Inventory* leftChild;
-        Inventory* rightChild;
+        Inventory* leftChild = 0;
+        Inventory* rightChild = 0;
         bool firstAdd = true;
 
     public:
 
         ActionItem(){
-            name = "Action Item"                                                                // shouldn't really be used, just initialized for consistency's sake
+            name = "Action Item";                                                                // shouldn't really be used, just initialized for consistency's sake
         }
 
         ~ActionItem(){                                                                          // shouldn't have to delete item pointers because they're deleted here
@@ -88,12 +90,10 @@ class ActionItem : public Inventory {
             if (leftChild == ptr){                                                              //if the left item matches ptr, the function will get rid of left item
                 delete leftChild;
                 leftChild = 0;
-                cout << "The left item has been removed from Action Items."
             }
             else if (rightChild == ptr){                                                        //if the right item matches ptr, the function will get rid of right item (left is priority remove)
                 delete rightChild;
                 rightChild = 0;
-                cout << "The right item has been removed from Action Items."
             }
             else{
                 cout << "Sorry, the item cannot be removed!" << endl;                           //if ptr doesn't match anything the item probably isn't here. (shouldn't be seen by player since we use remove function)
@@ -102,13 +102,13 @@ class ActionItem : public Inventory {
 
         void use(Inventory* ptr, Character* playerClass){
             if (leftChild == ptr){                                                              //if the left item matches ptr, it'll use the left one
-                leftChild->use(ptr);
+                leftChild->use(ptr, playerClass);
             }
             else if (rightChild == ptr){                                                        //if the right item matches ptr, it'll use the right one (left is priority use)
-                rightChild->use(ptr);
+                rightChild->use(ptr, playerClass);
             }
             else{                                                                               //if ptr doesn't match anything then the item requested isn't here. (shouldn't be seen by player since we call use function)
-                cout << "The requested item is not in Action Items."
+                cout << "The requested item is not in Action Items." << endl;
             }
         }
 
@@ -155,14 +155,14 @@ class HealItem : public Inventory {
 
     private:
 
-        Inventory* leftChild;
-        Inventory* rightChild;
+        Inventory* leftChild = 0;
+	Inventory* rightChild = 0;
         bool firstAdd = true;
 
     public:
 
         HealItem(){
-            name = "Heal Item"                                                                // shouldn't really be used, just initialized for consistency's sake
+            name = "Heal Item";                                                                // shouldn't really be used, just initialized for consistency's sake
         }
 
         ~HealItem(){                                                                          // shouldn't have to delete item pointers because they're deleted here
@@ -216,13 +216,11 @@ class HealItem : public Inventory {
             if (leftChild == ptr){                                                              //if the left item matches ptr, the function will get rid of left item
                 delete leftChild;
                 leftChild = 0;
-                cout << "The left item has been removed from Heal Items."
-            }
+               }
             else if (rightChild == ptr){                                                        //if the right item matches ptr, the function will get rid of right item (left is priority remove)
                 delete rightChild;
                 rightChild = 0;
-                cout << "The right item has been removed from Heal Items."
-            }
+               }
             else{
                 cout << "Sorry, the item cannot be removed!" << endl;                           //if ptr doesn't match anything the item probably isn't here. (shouldn't be seen by player since we use remove function)
             }
@@ -236,7 +234,7 @@ class HealItem : public Inventory {
                 rightChild->use(ptr, playerClass);
             }
             else{                                                                               //if ptr doesn't match anything then the item requested isn't here. (shouldn't be seen by player since we call use function)
-                cout << "The requested item is not in Heal Items."
+                cout << "The requested item is not in Heal Items." << endl;
             }
         }
 
@@ -276,7 +274,7 @@ class HealItem : public Inventory {
         Inventory* getRightChild(){
             return rightChild;
         }
-}
+};
 
 class SmokeBomb : public Inventory {                                                            
     public:
@@ -287,6 +285,10 @@ class SmokeBomb : public Inventory {
         ~SmokeBomb(){
 
         }
+
+	void setChild(Inventory* ptr){
+	
+	}
 
         void setChildLeft(Inventory* ptr){                                                  //going to be an empty function because we aren't going to use it
 
@@ -306,7 +308,16 @@ class SmokeBomb : public Inventory {
         string getItemName(){
             return name;
         } 
-}
+
+	Inventory* getLeftChild(){
+
+	}
+
+	Inventory* getRightChild(){
+
+	}
+
+};
 
 class StrengthPotion : public Inventory {                                                            
     public:
@@ -317,6 +328,10 @@ class StrengthPotion : public Inventory {
         ~StrengthPotion(){
 
         }
+
+	void setChild(Inventory* ptr){
+
+	}
 
         void setChildLeft(Inventory* ptr){                                                  //going to be an empty function because we aren't going to use it
  
@@ -338,7 +353,15 @@ class StrengthPotion : public Inventory {
         string getItemName(){
             return name;
         } 
-}
+
+	Inventory* getLeftChild(){
+	
+	}
+
+	Inventory* getRightChild(){
+
+	}
+};
 
 class HealthPotion : public Inventory {                                                            
     public:
@@ -349,6 +372,10 @@ class HealthPotion : public Inventory {
         ~HealthPotion(){
 
         }
+
+	void setChild(Inventory* ptr){
+
+	}
 
         void setChildLeft(Inventory* ptr){                                                  //going to be an empty function because we aren't going to use it
  
@@ -361,7 +388,7 @@ class HealthPotion : public Inventory {
         }
         void use(Inventory* ptr, Character* playerClass){                                              
             cout << "You have drunk a Health Potion! " << endl;
-            playerClass->heal();
+//            playerClass->heal();
         }
         void printItem(){
             cout << "Heal Potion: Allows the user to recover health." << endl;
@@ -369,7 +396,16 @@ class HealthPotion : public Inventory {
         string getItemName(){
             return name;
         } 
-}
+
+	Inventory* getLeftChild(){
+
+	}
+
+	Inventory* getRightChild(){
+
+	}
+};
+
 
 
 #endif
