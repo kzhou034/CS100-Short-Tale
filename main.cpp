@@ -172,7 +172,7 @@ int main(){
     PrintChapter1(actionItem, healItem, playerClass, enemy1);
     cout << "You have leveled up! Your health has been reseted, and you have gained an increase to your stats." << endl;
     cout << "Press any key to continue." << endl;
-    goldStorage += 25;
+    goldStorage += 50;
     cin >> answer;
     system("cls");
     playerClass->setlevel(2);
