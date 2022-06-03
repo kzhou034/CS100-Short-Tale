@@ -158,16 +158,16 @@ class Knight : public Character {
         void setlevel(int l) {
             level = l;
 
-            max_health = 7 * pow(l, 1.5);
+            max_health = 10 * pow(l, 1.5);
             health = max_health;
 
-            attack = 8 * pow(l, 1.2);
+            attack = 6 * pow(l, 1.2);
 
-            defense = 3 * pow(l, 1.7);
+            defense = 10 * pow(l, 1.6);
 
-            resistance = 4 * pow(l, 1.5);
+            resistance = 10 * pow(l, 1.5);
 
-            speed = 6 * pow(l, 1.3);
+            speed = 4 * pow(l, 1.4);
         };
         void heal() {
             double amt;
@@ -488,9 +488,7 @@ class Mage : public Character {
         };
         void waningMoon(Character* target){
             int dmg = get_attack() * 1.2;
-
             int heal = 0.2 * get_max_health();
-
 
             double realdmg1 = 75;
             double realdmg2 = 0;
@@ -505,9 +503,7 @@ class Mage : public Character {
                 dmg *= realdmg1;
             }
             target->set_health(target->get_health() - dmg);
-
             set_health(get_health() + heal);
-
 
           
             cout << "You cast a spell of moon's blessing.\n" << endl;
@@ -554,9 +550,7 @@ class Rogue : public Character {
         };
         ~Rogue() {};
 
-
         Rogue(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
-
             name = _name;
             type = _type;
 
@@ -606,9 +600,9 @@ class Rogue : public Character {
 
             attack = 8 * pow(l, 1.2);
 
-            defense = 3 * pow(l, 1.7);
+            defense = 4 * pow(l, 1.7);
 
-            resistance = 2 * pow(l, 1.5);
+            resistance = 3 * pow(l, 1.5);
 
             speed = 8 * pow(l, 1.3);
         };
@@ -685,9 +679,7 @@ class Rogue : public Character {
         void action(Character* target) {};
 
         bool pickLock() {
-
             if (max_lockpicks > 0) {
-
                 lockPick = true;
                 max_lockpicks--;
                 return true;
@@ -904,18 +896,17 @@ class Enemy : public Character {
 
             level = l;
 
-            mhealth *= pow(l, 2);
+            mhealth *= pow(l, 1.7);
             mhealth += mod;
             health = mhealth;
 
             attack *= pow(l, 1.2);
-
             attack += mod;
 
-            defense *= pow(l, 1.7);
+            defense *= pow(l, 1.5);
             defense -= mod;
 
-            resistance *= pow(l, 1.7);
+            resistance *= pow(l, 1.5);
             resistance -= mod;
 
             speed *= pow(l, 1.3);
@@ -924,15 +915,13 @@ class Enemy : public Character {
         
         void heal() {
             double amt;
-
             double mult = level;
             if(get_level() > 4){
-              mult *= 0.035;
+              mult *= 0.02;
             }
           else{
             mult *= 0.05;
           }
-
             amt = mult * mhealth;
             amt++;
 
@@ -942,10 +931,8 @@ class Enemy : public Character {
             else {
                 health += amt;
             }
-
             int val = amt;
             cout << "The " << get_name() << " healed for " << val << "." << endl;
-
         };
 
         void atk(Character* target) {
@@ -1010,7 +997,7 @@ class Enemy : public Character {
             int act = rand() % 100;
 
             if (get_health() > (get_max_health() / 2)) {
-                if (act < 80) {
+                if (act < 90) {
                     atk(target);
                 }
                 else {
@@ -1018,9 +1005,7 @@ class Enemy : public Character {
                 }
             }
             else if (get_health() > (get_max_health() / 4)) {
-
-                if (act < 70) {
-
+                if (act < 80) {
                     atk(target);
                 }
                 else {
@@ -1028,7 +1013,7 @@ class Enemy : public Character {
                 }
             }
             else {
-                if (act < 50) {
+                if (act < 95) {
                     atk(target);
                 }
                 else {
