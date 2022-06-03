@@ -414,6 +414,9 @@ bool inCombat(Character* player, Character* enemy){
   while(isVictory){
     if(player->get_health() <= 0){
       player->set_health(player->get_max_health());
+      if(player->getStatus){
+    player->lowershield();
+  }
       return false;
     }
     cout << "[Turn " << turnNum << "]\n" << endl;
@@ -457,6 +460,9 @@ bool inCombat(Character* player, Character* enemy){
         cout << endl;
         sleep(2);
         if(enemy->get_health() <= 0){
+          if(player->getStatus){
+    player->lowershield();
+  }
           return true;
         }
         else{
@@ -481,6 +487,9 @@ bool inCombat(Character* player, Character* enemy){
       cout << endl;
         sleep(2);
         if(enemy->get_health() <= 0){
+          if(player->getStatus){
+    player->lowershield();
+  }
           return true;
       }
       else{
@@ -518,6 +527,9 @@ bool inCombat(Character* player, Character* enemy){
     else if (answer == "5") {
         cout << "You try to run away." << endl;
         system("cls");
+        if(player->getStatus){
+    player->lowershield();
+  }
         return false;
     }
     turnNum++;
@@ -527,6 +539,9 @@ bool inCombat(Character* player, Character* enemy){
     if(player->getCD2() != 0){
       player->redCD2();
     }
+  }
+  if(player->getStatus){
+    player->lowershield();
   }
   return true;
 }
