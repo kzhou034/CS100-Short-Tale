@@ -38,11 +38,11 @@ int main(){
   (*enemy5).setlevel(5);
   
     Character* enemy6;
-    enemy6 = new Enemy("Demon Knight", "Demon", 1, 15, 2, 5, 2, 5);
+    enemy6 = new Enemy("Demon Knight", "Demon", 1, 13, 2, 5, 2, 5);
   (*enemy6).setlevel(6);
   
     Character* enemy7;
-    enemy7 = new Enemy("Demon Lord", "Demon", 1, 20, 3, 2, 2, 5);
+    enemy7 = new Enemy("Demon Lord", "Demon", 1, 15, 3, 2, 2, 5);
   (*enemy7).setlevel(7);
 
   cout << "Welcome to Short Tale! The princess has been kidnapped, and there was nothing we could do to stop it!" << endl;
@@ -61,36 +61,28 @@ int main(){
     cin >> answer;
     system("cls");
 
-
     while(answer != "1" && answer != "2"){
         cout << "That doesn't seem to be a valid answer. Please press 1 for Yes and 2 for No." << endl;
         answer = "";
         cin >> answer;
-
         system("cls");
     }
-
 
 
     while(answer == "2"){
         cout << "I see. Once again, what is your name?" << endl;
         name = "";
         cin >> name;
-
         system("cls");
-
         cout << "I see. So your name is " << name << "?" << endl;       //rechecks name
         cout << "Press 1 for Yes and 2 for No." << endl;                //redoes confirmation line
         answer = "";
         cin >> answer;
-
         system("cls");
-
         while(answer != "1" && answer != "2"){   //re-asks if invalid answer is given
             cout << "That doesn't seem to be a valid answer. Please press 1 for Yes and 2 for No." << endl;
             answer = "";
             cin >> answer;
-
           system("cls");
         }
     }
@@ -147,7 +139,7 @@ int main(){
     }
     if (answer == "1") {
         cout << "I see. So you are a knight!" << endl;
-        playerClass = new Knight(name, "Knight", 10, 6, 8, 6, 4);
+        playerClass = new Knight(name, "Knight", 10, 6, 10, 10, 4);
     }
 
     else if (answer == "2") {
@@ -224,4 +216,5 @@ int main(){
     delete strengthPotion;
     delete healthPotion;
 }
+
 
