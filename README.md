@@ -40,17 +40,50 @@ The "HealthPotion" class will be used to recover health for all classes.
 
 Here, we used a composite design pattern to implement the entire inventory. The Inventory is interacted with by the player and will contain all of the other aspects, which are "contained" within the Inventory. The Inventory can exist without any of the following classes, by having an "empty" Inventory, but we have categorized items to exist within the Inventory and to be sorted by the type of items that they are are under the composite classes. In this way, we are able to better sort the inventory and allow item buying and selection to be a lot more manageable. This design pattern allows us to write better code because it gives us a better understanding of how the inventory to work and we can work around this pattern in consideration of how the Inventory should look like when it is fully developed.
  
- > ## Final deliverable
- > All group members will give a demo to the TA/reader during lab time. The TA/reader will check the demo and the project GitHub repository and ask a few questions to all the team members. 
- > Before the demo, you should do the following:
- > * Complete the sections below (i.e. Screenshots, Installation/Usage, Testing)
- > * Plan one more sprint (that you will not necessarily complete before the end of the quarter). Your In-progress and In-testing columns should be empty (you are not doing more work currently) but your TODO column should have a full sprint plan in it as you have done before. This should include any known bugs (there should be some) or new features you would like to add. These should appear as issues/cards on your Project board.
- > * Make sure your README file and Project board are up-to-date reflecting the current status of your project (e.g. any changes that you have made during the project such as changes to your class diagram). Previous versions should still be visible through your commit history. 
- 
  ## Screenshots
- > Screenshots of the input/output after running your application
+Character Creation:
+
+<img width="407" alt="ShortTaleStart" src="https://user-images.githubusercontent.com/77300057/171938265-47e77a4c-3983-4265-996d-b011ec7d23a8.PNG">
+
+<img width="411" alt="ShortTaleStart2" src="https://user-images.githubusercontent.com/77300057/171938288-7db74ab6-cb0c-46d1-81e9-9273dc5e3e85.PNG">
+
+Stage 1/First Battle:
+
+<img width="476" alt="ShortTaleStage1Text" src="https://user-images.githubusercontent.com/77300057/171938638-1ac6e480-ae8a-42a6-aed7-fcdf77b70856.PNG">
+
+<img width="127" alt="ShortTaleBattle1" src="https://user-images.githubusercontent.com/77300057/171938650-0a7a4922-d42a-4392-88d9-9935468c978f.PNG">
+
+<img width="136" alt="ShortTaleBattle2" src="https://user-images.githubusercontent.com/77300057/171938661-1116dcc6-f70e-4729-91e4-a55db53f92c1.PNG">
+
+Level Up:
+
+<img width="394" alt="ShortTaleLvlUp" src="https://user-images.githubusercontent.com/77300057/171938678-3eb27425-01b5-48ab-95e0-0f766d5ac3b3.PNG">
+
  ## Installation/Usage
- > Instructions on installing and running your application
+ 
+ ### VSCode on Windows:
+ Download the files (make sure all files are under the same folder). Then, open an integrated terminal for the folder and run:
+ 
+ ```
+ g++ main.cpp gamefunc.cpp
+ ```
+ 
+ This will general an executable called ```a.exe```. Run ```./a.exe``` in your terminal.
+ 
+ ### Hammer:
+ Clone the repository in hammer using 
+ ```
+ git clone --recursive https://github.com/cs100/final-project-jhu113_kzhou034_kpham130_ehoan011.git
+ ```
+ 
+ Then, run the commands:
+ 
+ ```
+ cmake3 .
+ make
+ ```
+ The should generate an executable called ```./main```. Run that in your terminal. 
+ 
  ## Testing
- > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
+ The functions were tested with the GoogleTest Framework as well as playing through the game ourselves multiple times to check for critical errors and bugs.
  
