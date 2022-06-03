@@ -6,6 +6,9 @@
 #include "Character.hpp"
 #include "knight_tests.cpp"
 #include "inventory_tests.cpp"
+#include "mage_tests.cpp"
+#include "rogue_tests.cpp"
+#include "enemy_tests.cpp"
 
 int main(int argc, char **argv) {
         ::testing::InitGoogleTest(&argc, argv);
