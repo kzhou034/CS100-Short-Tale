@@ -597,25 +597,18 @@ class Rogue : public Character {
         int get_speed() {return speed;};
 
         void setlevel(int l) {
-            int mod = rand() % l;
-
             level = l;
 
-            max_health *= pow(l, 1.5);
-            max_health += mod;
+            max_health = 6 * pow(l, 1.5);
             health = max_health;
 
-            attack *= pow(l, 1.2);
-            attack += mod;
+            attack = 8 * pow(l, 1.2);
 
-            defense *= pow(l, 1.7);
-            defense -= mod;
+            defense = 3 * pow(l, 1.7);
 
-            resistance *= pow(l, 1.5);
-            resistance -= mod;
+            resistance = 2 * pow(l, 1.5);
 
-            speed *= pow(l, 1.3);
-            speed += mod;
+            speed = 8 * pow(l, 1.3);
         };
 
         void heal() {
@@ -1051,3 +1044,5 @@ class Enemy : public Character {
         void waningMoon(Character* target){};
 };
 #endif //__CHARACTER_HPP__
+
+
