@@ -42,6 +42,18 @@ class ActionItem : public Inventory {
             delete rightChild;
         }
 
+        void setChild(Inventory* ptr){
+            if (leftChild != 0 && rightChild != 0){
+                cout << "Action Items tab is full." << endl;
+            }
+            else if (leftChild == 0){
+                setChildLeft(ptr);
+            }
+            else if (rightChild == 0){
+                setChildRight(ptr);
+            }
+        }
+
         void setChildLeft(Inventory* ptr){                                                      // add items to Action Items
             if (leftChild == 0 && firstAdd == true){
                 cout << "You have opened up the Action Items tab in the Inventory!" << endl;
@@ -122,12 +134,21 @@ class ActionItem : public Inventory {
                 cout << "Left slot: " << leftChild->getItemName() << endl;
                 cout << "Right slot: " << rightChild->getItemName() << endl;
             }
-            cout << "Please press 1 or 2 to decide what item you wish to use." << endl;         // user input
+            cout << "Please press 1 to use the left item, 2 to use the right item, and 3 to exit." << endl;         // user input
         }
         
         string getItemName(){                 //this should essentially be useless for Action Item class
             return name;
         }
+
+        Inventory* getLeftChild(){
+            return leftChild;
+        }
+
+        Inventory* getRightChild(){
+            return rightChild;
+        }
+
 };
 
 class HealItem : public Inventory {
@@ -147,6 +168,18 @@ class HealItem : public Inventory {
         ~HealItem(){                                                                          // shouldn't have to delete item pointers because they're deleted here
             delete leftChild;
             delete rightChild;
+        }
+
+        void setChild(Inventory* ptr){
+            if (leftChild != 0 && rightChild != 0){
+                cout << "Heal Items tab is full." << endl;
+            }
+            else if (leftChild == 0){
+                setChildLeft(ptr);
+            }
+            else if (rightChild == 0){
+                setChildRight(ptr);
+            }
         }
 
         void setChildLeft(Inventory* ptr){                                                      // add items to Heal Items
@@ -197,10 +230,10 @@ class HealItem : public Inventory {
 
         void use(Inventory* ptr, Character* playerClass){
             if (leftChild == ptr){                                                              //if the left item matches ptr, it'll use the left one
-                leftChild->use(ptr);
+                leftChild->use(ptr, playerClass);
             }
             else if (rightChild == ptr){                                                        //if the right item matches ptr, it'll use the right one (left is priority use)
-                rightChild->use(ptr);
+                rightChild->use(ptr, playerClass);
             }
             else{                                                                               //if ptr doesn't match anything then the item requested isn't here. (shouldn't be seen by player since we call use function)
                 cout << "The requested item is not in Heal Items."
@@ -229,11 +262,19 @@ class HealItem : public Inventory {
                 cout << "Left slot: " << leftChild->getItemName() << endl;
                 cout << "Right slot: " << rightChild->getItemName() << endl;
             }
-            cout << "Please press 1 or 2 to decide what item you wish to use." << endl;         // user input
+            cout << "Please press 1 to use the left item, 2 to use the right item, and 3 to exit." << endl;         // user input
         }
         
         string getItemName(){                 //this should essentially be useless for Heal Item class
             return name;
+        }
+
+        Inventory* getLeftChild(){
+            return leftChild;
+        }
+
+        Inventory* getRightChild(){
+            return rightChild;
         }
 }
 
