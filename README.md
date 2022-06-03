@@ -26,17 +26,15 @@ The "Knight,""Mage," and "Rogue" classes also have their own respective skills. 
 
 The "Inventory" class will be used to create an inventory system in which players can interact with the interface to use healing items or battle items.
 
-The "Battle Items" class will be used to select from two select items in the battle item inventory.
+The "ActionItems" class will be used to select from two select items in the battle item inventory.
 
-The "Healing Items" class will be used similarly to "Battle Items" (see above).
+The "HealingItems" class will be used similarly to "Battle Items" (see above).
 
-The "Smoke Bomb" class will be used to guarantee running away from enemies.
+The "SmokeBomb" class will be used to guarantee running away from enemies.
 
-The "Strength Potion" class will be used to empower the player's attacks.
+The "StrengthPotion" class will be used to empower the player's attacks.
 
-The "Mana Potion" class will be used to recover mana for mages.
-
-The "Health Potion" class will be used to recover health for all classes.
+The "HealthPotion" class will be used to recover health for all classes.
 
 ![UML DIAGRAM_ INVENTORY COMPOSITE](https://user-images.githubusercontent.com/101243368/171780075-7f11245f-b7fb-40fc-bfb1-63f878096317.png)
 
