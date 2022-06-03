@@ -47,17 +47,17 @@ int main(){
     cout << "Before you embark on your mission, what is your name?" << endl;
     cin >> name;
     cout << endl;
-    system("clear");
+    system("cls");
     cout << "I see. So your name is " << name << "?" << endl;
     cout << "Press 1 for Yes and 2 for No." << endl;
     cin >> answer;
-    system("clear");
+    system("cls");
 
     while(answer != "1" && answer != "2"){
         cout << "That doesn't seem to be a valid answer. Please press 1 for Yes and 2 for No." << endl;
         answer = "";
         cin >> answer;
-        system("clear");
+        system("cls");
     }
 
 
@@ -65,24 +65,24 @@ int main(){
         cout << "I see. Once again, what is your name?" << endl;
         name = "";
         cin >> name;
-        system("clear");
+        system("cls");
         cout << "I see. So your name is " << name << "?" << endl;       //rechecks name
         cout << "Press 1 for Yes and 2 for No." << endl;                //redoes confirmation line
         answer = "";
         cin >> answer;
-        system("clear");
+        system("cls");
         while(answer != "1" && answer != "2"){   //re-asks if invalid answer is given
             cout << "That doesn't seem to be a valid answer. Please press 1 for Yes and 2 for No." << endl;
             answer = "";
             cin >> answer;
-          system("clear");
+          system("cls");
         }
     }
     
 
     sleep(1);
     cout << endl;
-    system("clear");
+    system("cls");
     cout << "I see, so you're " << name << "!" << endl;
     sleep(2);
     cout << "Well, " << name << ", I don't seem to remember what your class was. Can you please remind me?" << endl;
@@ -109,7 +109,7 @@ int main(){
 
     answer = "";
     cin >> answer;
-    system("clear");
+    system("cls");
     Character* playerClass;
   
     while(answer != "1" && answer != "2" && answer != "3"){   
@@ -127,7 +127,7 @@ int main(){
         cout << "PLEASE NOTE: Once you make your decision, there is no going back or changing your mind." << endl;
         answer = "";
         cin >> answer;
-        system("clear");
+        system("cls");
     }
     if (answer == "1") {
         cout << "I see. So you are a knight!" << endl;
@@ -151,7 +151,7 @@ int main(){
     sleep(5);
 
 
-    system("clear");
+    system("cls");
     PrintChapter1(playerClass, enemy1);
     playerClass->setlevel(2);
     PrintChapter2(playerClass, enemy2);
@@ -174,3 +174,5 @@ int main(){
     delete enemy7;
   
 }
+
+
