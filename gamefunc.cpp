@@ -794,7 +794,7 @@ void PrintChapter4(Inventory* actionItems, Inventory* healItems, Character* play
       PrintChapter4(actionItems, healItems, player, enemy, enemy2);
     }
 
-    isVictory = inCombat(actionItems, healItems, player, enemy);
+    isVictory = inCombat(actionItems, healItems, player, enemy2);
     if(isVictory){
       cout <<  "You defeat the second demon." << endl;
     }
@@ -803,7 +803,7 @@ void PrintChapter4(Inventory* actionItems, Inventory* healItems, Character* play
       cout << "Restart the chapter?" << endl;
       cin >> answer;
       player->set_health(player->get_max_health());
-      enemy->set_health(enemy->get_max_health());
+      enemy2->set_health(enemy2->get_max_health());
       system("cls");
       PrintChapter4(actionItems, healItems, player, enemy, enemy2);
     }
