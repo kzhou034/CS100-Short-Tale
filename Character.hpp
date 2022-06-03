@@ -10,11 +10,13 @@
 using namespace std;
 
 class Character {
-    public: 
+
+	public: 
 		Character() {};
-        ~Character() {};
+        	virtual ~Character() {};
 
 		virtual void set_name(string) = 0;
+
         virtual void set_type(string) = 0;
         virtual void set_level(int) = 0;
         virtual void set_health(int) = 0;
@@ -48,6 +50,7 @@ class Character {
 		virtual void hurt(Character* target) = 0;
 		virtual void print() = 0;
 		virtual void action(Character*) = 0;
+
 
 		virtual bool pickLock() = 0;
       
@@ -86,6 +89,7 @@ class Knight : public Character {
             speed = -1;
         };
         ~Knight() {};
+
 
         //format: Knight(Name, TypeName, health, attack, defense, resistance, speed)
         Knight(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
@@ -231,8 +235,9 @@ class Mage : public Character {
         };
         ~Mage() {};
 
-        //format: Knight(Name, TypeName, health, attack, defense, resistance, speed)
+
         Mage(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) : Character() {
+
             name = _name;
             type = _type;
 
@@ -376,7 +381,8 @@ class Rogue : public Character {
         ~Rogue() {};
 
         //format: Rogue(Name, TypeName, health, attack, defense, resistance, speed)
-        Rogue(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
+        Rogue(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed){
+
             name = _name;
             type = _type;
 
