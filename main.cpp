@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "Character.hpp"
 #include "gamefunc.h"
+#include "gamefunc.cpp"
 #include "Inventory.hpp"
 using namespace std;
 
