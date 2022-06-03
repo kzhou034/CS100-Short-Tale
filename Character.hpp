@@ -4,75 +4,67 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
-#include <iterator>
+#include <cmath>
+#include <ctime>
 
 using namespace std;
 
-//component
 class Character {
- 	protected:
- 		string name;
- 		string type;
- 		int level;
- 		int health;
- 		int defense;
- 		int resistance;
- 		int speed;
-	
+
 	public: 
 		Character() {};
         	virtual ~Character() {};
 
-		// setters/getters/stat changes
 		virtual void set_name(string) = 0;
-		virtual void set_type(string) = 0;
-        	virtual void set_level(int) = 0;
-        	virtual void set_health(int) = 0;
-        	virtual void set_attack(int) = 0;
-        	virtual void set_defense(int) = 0;
-        	virtual void set_resistance(int) = 0;
-        	virtual void set_speed(int) = 0;
 
-        	virtual void add_level(int) = 0;
-        	virtual void add_health(int) = 0;
-        	virtual void add_attack(int) = 0;
-        	virtual void add_defense(int) = 0;
-        	virtual void add_resistance(int) = 0;
-        	virtual void add_speed(int) = 0;
+        virtual void set_type(string) = 0;
+        virtual void set_level(int) = 0;
+        virtual void set_health(int) = 0;
+        virtual void set_max_health(int) = 0;
+        virtual void set_attack(int) = 0;
+        virtual void set_defense(int) = 0;
+        virtual void set_resistance(int) = 0;
+        virtual void set_speed(int) = 0;
 
-        	virtual string get_name() = 0;
-        	virtual string get_type() = 0;
-        	virtual int get_level() = 0;
-        	virtual int get_health() = 0;
-        	virtual int get_attack() = 0;
-        	virtual int get_defense() = 0;
-        	virtual int get_resistance() = 0;
-        	virtual int get_speed() = 0;
+        virtual void add_level(int) = 0;
+        virtual void add_health(int) = 0;
+        virtual void add_max_health(int) = 0;
+        virtual void add_attack(int) = 0;
+        virtual void add_defense(int) = 0;
+        virtual void add_resistance(int) = 0;
+        virtual void add_speed(int) = 0;
 
-		// new skills/attacks?
+        virtual string get_name() = 0;
+        virtual string get_type() = 0;
+        virtual int get_level() = 0;
+        virtual int get_health() = 0;
+        virtual int get_max_health() = 0;
+        virtual int get_attack() = 0;
+        virtual int get_defense() = 0;
+        virtual int get_resistance() = 0;
+        virtual int get_speed() = 0;
+
+        virtual void setlevel(int) = 0; // make sure to only use default constructor unless you want crazy scaling
+		virtual void heal() = 0;
+		virtual void atk(Character* target) = 0;
+		virtual void hurt(Character* target) = 0;
+		virtual void print() = 0;
+		virtual void action(Character*) = 0;
+
+
 		virtual bool pickLock() = 0;
-
-		// add/remove
-		virtual void add(Character* ) = 0;
-        	virtual void remove(Character* ) = 0;
+      
 };
-
-//leaf
 
 class Knight : public Character {
     private:
         string name;
         string type;
 
-        int max_level;
         int max_health;
         int max_lockpicks = 0;
-	// int max_attack;
-	// int max_defense;
-	// int max_resistance;
-	// int max_speed
-	
-	int level;
+
+        int level;
         int health;
         int attack;
         int defense;
@@ -81,42 +73,34 @@ class Knight : public Character {
 
         bool lockPick = false;
 
-   public:
-	Knight() {
+    public:
+        Knight() {
             name = "unknown";
             type = "unknown";
             
-            max_level = -1;
             max_health = -1;
-	    // max_attack = -1;
-	    // max_defense = -1;
-	    // max_resistance = -1;
-	    // max_speed = -1;
-	    
-	    level = -1;
+            max_lockpicks = -1;
+
+            level = -1;
             health = -1;
             attack = -1;
             defense = -1;
             resistance = -1;
             speed = -1;
-
         };
         ~Knight() {};
 
-	//format: Knight(Name, TypeName, health, attack, defense, resistance, speed)
-	Knight(const string &_name, const string &_type, int _health, int _attack, int _defense , int _resistance , int _speed) {
-            name = _name;  
+
+        //format: Knight(Name, TypeName, health, attack, defense, resistance, speed)
+        Knight(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
+            name = _name;
             type = _type;
-	    
-	    //when we do damage calculations: after battle, set the stats back to these
-	    max_level = 5;
+
+            //when we do damage calculations: after battle, set the stats back to these
+            max_lockpicks = 0;
             max_health = _health;
-	    // max_attack = _attack;
-	    // max_defense = _defense;
-	    // max_resistance = _resistance;
-	    // max_speed = _speed;
-	    
-	    level = 1;
+
+            level = 1;
             health = _health;
             attack = _attack;
             defense = _defense;
@@ -124,10 +108,11 @@ class Knight : public Character {
             speed = _speed;
         };
 
-	void set_name(string a) {name = a;};
+        void set_name(string a) {name = a;};
         void set_type(string a) {type = a;};
         void set_level(int x) {level = x;};
         void set_health(int x) {health = x;};
+        void set_max_health(int x) {max_health = x;};
         void set_attack(int x) {attack = x;};
         void set_defense(int x) {defense = x;};
         void set_resistance(int x) {resistance = x;};
@@ -135,6 +120,7 @@ class Knight : public Character {
 
         void add_level(int x) {level += x;};
         void add_health(int x) {health += x;};
+        void add_max_health(int x) {max_health += x;};
         void add_attack(int x) {attack += x;};
         void add_defense(int x) {defense += x;};
         void add_resistance(int x) {resistance += x;};
@@ -144,42 +130,85 @@ class Knight : public Character {
         string get_type() {return type;};
         int get_level() {return level;};
         int get_health() {return health;};
+        int get_max_health() {return max_health;};
         int get_attack() {return attack;};
         int get_defense() {return defense;};
         int get_resistance() {return resistance;};
         int get_speed() {return speed;};
 
-	//Knight can't do this
-	bool pickLock() {
-            if (level == 2 && type == "rogue" && max_lockpicks > 0) {
-                lockPick = true;
-                max_lockpicks--;
-                return true;
+        void setlevel(int) {};
+        void heal() {
+            double amt;
+            double mult = 0.05 * level;
+            amt = mult * max_health;
+            amt++;
+
+            if (amt + health >= max_health) {
+                health = max_health;
             }
-            return false;
+            else {
+                health += amt;
+            }
         };
 
-	//Knight can't do these
-	void add(Character* ) {};
-        void remove(Character* ) {};
+        void atk(Character* target) {
+            int dmg = get_attack();
+
+            if (get_type() == "Mage") {
+                dmg -= target->get_resistance();
+            }
+            else {
+                dmg -= target->get_defense();
+            }
+            
+            if (dmg < 0) {
+                dmg = 0;
+            }
+
+            target->set_health(target->get_health() - dmg);
+
+            cout << target->get_name() << " took " << dmg << " points of damage" << endl;
+        };
+
+        void hurt(Character* target) { 
+            int dmg;
+            if (target->get_type() == "Mage") {
+                dmg = target->get_attack() - get_resistance();
+            }
+            else {
+                dmg = target->get_attack() - get_defense();
+            }
+
+            if (dmg < 0)
+                dmg = 0;
+            
+            set_health(get_health() - dmg);
+
+            cout << get_name() << " took " << dmg << " points of damage" << endl;
+        };
+
+        void print() {
+            cout << "Name: " << get_name() << endl;
+            cout << "Level: " << get_level() << endl;
+            cout << "Health: " << get_health() << "/" << get_max_health() << endl;
+        };
+
+        void action(Character* target) {};
+
+        //Knight can't do this
+        bool pickLock() {return false;};
 
 };
 
-//leaf
 class Mage : public Character {
     private:
         string name;
         string type;
 
-        int max_level;
         int max_health;
         int max_lockpicks = 0;
-	// int max_attack;
-	// int max_defense;
-	// int max_resistance;
-	// int max_speed;
-	
-	int level;
+
+        int level;
         int health;
         int attack;
         int defense;
@@ -193,14 +222,10 @@ class Mage : public Character {
             name = "unknown";
             type = "unknown";
             
-            max_level = -1;
+            max_lockpicks = -1;
             max_health = -1;
-	    // max_attack = -1;
-	    // max_defense = -1;
-	    // max_resistance = -1;
-	    // max_speed = -1;
-	    
-	    level = -1;
+
+            level = -1;
             health = -1;
             attack = -1;
             defense = -1;
@@ -210,20 +235,16 @@ class Mage : public Character {
         };
         ~Mage() {};
 
-	//format: Knight(Name, TypeName, health, attack, defense, resistance, speed)
-	Mage(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed){
+
+        Mage(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) : Character() {
+
             name = _name;
             type = _type;
 
-	    //when we do damage calculations: after battle, set the stats back to these
-	    max_level = 5;
+            max_lockpicks = 0;
             max_health = _health;
-            // max_attack = _attack;
-            // max_defense = _defense;
-            // max_resistance = _resistance;
-            // max_speed = _speed;
 
-	    level = 1;
+            level = 1;
             health = _health;
             attack = _attack;
             defense = _defense;
@@ -235,6 +256,7 @@ class Mage : public Character {
         void set_type(string a) {type = a;};
         void set_level(int x) {level = x;};
         void set_health(int x) {health = x;};
+        void set_max_health(int x) {max_health = x;};
         void set_attack(int x) {attack = x;};
         void set_defense(int x) {defense = x;};
         void set_resistance(int x) {resistance = x;};
@@ -242,6 +264,7 @@ class Mage : public Character {
 
         void add_level(int x) {level += x;};
         void add_health(int x) {health += x;};
+        void add_max_health(int x) {max_health += x;};
         void add_attack(int x) {attack += x;};
         void add_defense(int x) {defense += x;};
         void add_resistance(int x) {resistance += x;};
@@ -251,28 +274,76 @@ class Mage : public Character {
         string get_type() {return type;};
         int get_level() {return level;};
         int get_health() {return health;};
+        int get_max_health() {return max_health;};
         int get_attack() {return attack;};
         int get_defense() {return defense;};
         int get_resistance() {return resistance;};
         int get_speed() {return speed;};
 
-	//Mage can't do this
-	bool pickLock() {
-            if (level == 2 && type == "rogue" && max_lockpicks > 0) {
-                lockPick = true;
-                max_lockpicks--;
-                return true;
+        void setlevel(int) {};
+        void heal() {
+            double amt;
+            double mult = 0.05 * level;
+            amt = mult * max_health;
+            amt++;
+
+            if (amt + health >= max_health) {
+                health = max_health;
             }
-            return false;
+            else {
+                health += amt;
+            }
         };
 
-	//Mage can't do these
-	void add(Character* ) {};
-        void remove(Character* ) {};
+        void atk(Character* target) {
+            int dmg = get_attack();
 
-};      
+            if (get_type() == "Mage") {
+                dmg -= target->get_resistance();
+            }
+            else {
+                dmg -= target->get_defense();
+            }
+            
+            if (dmg < 0) {
+                dmg = 0;
+            }
 
-//leaf
+            target->set_health(target->get_health() - dmg);
+
+            cout << target->get_name() << " took " << dmg << " points of damage" << endl;
+        };
+
+        void hurt(Character* target) { 
+            int dmg;
+            if (target->get_type() == "Mage") {
+                dmg = target->get_attack() - get_resistance();
+            }
+            else {
+                dmg = target->get_attack() - get_defense();
+            }
+
+            if (dmg < 0)
+                dmg = 0;
+            
+            set_health(get_health() - dmg);
+
+            cout << get_name() << " took " << dmg << " points of damage" << endl;
+        };
+
+        void print() {
+            cout << "Name: " << get_name() << endl;
+            cout << "Level: " << get_level() << endl;
+            cout << "Health: " << get_health() << "/" << get_max_health() << endl;
+        };
+
+        void action(Character* target) {};
+
+        //Mage can't do this
+        bool pickLock() {return false;}; 
+
+};           
+
 class Rogue : public Character {
     private:
         string name;
@@ -281,12 +352,8 @@ class Rogue : public Character {
         int max_level;
         int max_health;
         int max_lockpicks = 2;
-	// int max_attack;
-	// int max_defense;
-	// int max_resistance;
-	// int max_speed;
-	
-	int level;
+
+        int level;
         int health;
         int attack;
         int defense;
@@ -302,12 +369,8 @@ class Rogue : public Character {
             
             max_level = -1;
             max_health = -1;
-	    // max_attack = -1;
-	    // max_defense = -1;
-	    // max_resistance = -1;
-	    // max_speed = -1;
-	    
-	    level = -1;
+
+            level = -1;
             health = -1;
             attack = -1;
             defense = -1;
@@ -319,18 +382,13 @@ class Rogue : public Character {
 
         //format: Rogue(Name, TypeName, health, attack, defense, resistance, speed)
         Rogue(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed){
+
             name = _name;
             type = _type;
 
-            //when we do damage calculations: after battle, set the stats back to these
-            max_level = 5;
             max_health = _health;
-            // max_attack = _attack;
-            // max_defense = _defense;
-            // max_resistance = _resistance;
-            // max_speed = _speed;
-            
-	    level = 1;
+
+            level = 1;
             health = _health;
             attack = _attack;
             defense = _defense;
@@ -342,6 +400,7 @@ class Rogue : public Character {
         void set_type(string a) {type = a;};
         void set_level(int x) {level = x;};
         void set_health(int x) {health = x;};
+        void set_max_health(int x) {max_health = x;};
         void set_attack(int x) {attack = x;};
         void set_defense(int x) {defense = x;};
         void set_resistance(int x) {resistance = x;};
@@ -349,6 +408,7 @@ class Rogue : public Character {
 
         void add_level(int x) {level += x;};
         void add_health(int x) {health += x;};
+        void add_max_health(int x) {max_health += x;};
         void add_attack(int x) {attack += x;};
         void add_defense(int x) {defense += x;};
         void add_resistance(int x) {resistance += x;};
@@ -358,13 +418,82 @@ class Rogue : public Character {
         string get_type() {return type;};
         int get_level() {return level;};
         int get_health() {return health;};
+        int get_max_health() {return max_health;};
         int get_attack() {return attack;};
         int get_defense() {return defense;};
         int get_resistance() {return resistance;};
         int get_speed() {return speed;};
 
+        void setlevel(int) {};
+        void heal() {
+            double amt;
+            double mult = 0.05 * level;
+            amt = mult * max_health;
+            amt++;
+
+            if (amt + health >= max_health) {
+                health = max_health;
+            }
+            else {
+                health += amt;
+            }
+        };
+
+        void atk(Character* target) {
+            int dmg = get_attack();
+
+            srand(time(0));
+
+            if (get_type() == "Mage") {
+                dmg -= target->get_resistance();
+            }
+            else {
+                dmg -= target->get_defense();
+            }
+            
+            if (dmg < 0) {
+                dmg = 0;
+            }
+            
+            //critical strike (a little extra damage)
+            int mod = rand();
+
+            if (mod % 3 == 0) {
+                dmg += 4;
+            }
+
+            target->set_health(target->get_health() - dmg);
+
+            cout << target->get_name() << " took " << dmg << " points of damage" << endl;
+        };
+
+        void hurt(Character* target) { 
+            int dmg;
+            if (target->get_type() == "Mage") {
+                dmg = target->get_attack() - get_resistance();
+            }
+            else {
+                dmg = target->get_attack() - get_defense();
+            }
+
+            if (dmg < 0)
+                dmg = 0;
+            
+            set_health(get_health() - dmg);
+
+            cout << get_name() << " took " << dmg << " points of damage" << endl;
+        };
+
+        void print() {
+            cout << "Name: " << get_name() << endl;
+            cout << "Level: " << get_level() << endl;
+            cout << "Health: " << get_health() << "/" << get_max_health() << endl;
+        };
+
+        void action(Character* target) {};
+
         bool pickLock() {
-            if (level == 2 && type == "rogue" && max_lockpicks > 0) {
+            if (level == 2 && type == "Rogue" && max_lockpicks > 0) {
                 lockPick = true;
                 max_lockpicks--;
                 return true;
@@ -372,11 +501,247 @@ class Rogue : public Character {
             return false;
         }; 
 
-	//Rogue can't do these
-	void add(Character* ) {};
-	void remove(Character* ) {};
+};
+
+class Enemy : public Character {
+	private:
+		string name;
+		string type;
+		int level;
+		int health;
+		int mhealth;
+		int attack;
+		int defense;
+		int resistance;
+		int speed;
+
+        int max_lockpicks = 0;
+
+        bool lockPick = false;
+    public:
+        Enemy() {
+            name = "???";
+            type = "???";
+            level = 1;
+            health = 10;
+            mhealth = 10;
+            attack = 3;
+            defense = 2;
+            resistance = 2;
+            speed = 5;
+        };
+        
+		Enemy(const string n, const string t, const int l, const int h, const int a, const int d, const int r, const int s) {
+            name = n;
+            type = t;
+            level = l;
+            health = h;
+            mhealth = h;
+            attack = a;
+            defense = d;
+            resistance = r;
+            speed = s;
+        };
+
+		~Enemy() {};
+
+		void set_name(string n) {
+            name = n;
+        }
+		void set_type(string t) {
+            type = t;
+        };
+		void set_level(int l) {
+            level = l;
+        };
+		void set_health(int h) {
+            health = h;
+        };
+		void set_max_health(int m) {
+            mhealth = m;
+        };
+		void set_attack(int a) {
+            attack = a;
+        };
+		void set_defense(int d) {
+            defense = d;
+        };
+		void set_resistance(int r) {
+            resistance = r;
+        };
+		void set_speed(int s) {
+            speed = s;
+        };
+		
+        void add_level(int l) {
+            level += l;
+        };
+        void add_health(int h) {
+            health += h;
+        };
+        void add_max_health(int m) {
+            mhealth += m;
+        };
+        void add_attack(int a) {
+            attack += a;
+        };
+        void add_defense(int d) {
+            defense += d;
+        };
+        void add_resistance(int r) {
+            resistance += r;
+        };
+        void add_speed(int s) {
+            speed += s;
+        };
+
+        string get_name() {
+            return name;
+        };
+        string get_type() {
+            return type;
+        };
+        int get_level() {
+            return level;
+        };
+        int get_health() {
+            return health;
+        };
+        int get_max_health() {
+            return mhealth;
+        };
+        int get_attack() {
+            return attack;
+        };
+        int get_defense() {
+            return defense;
+        };
+        int get_resistance() {
+            return resistance;
+        };
+        int get_speed() {
+            return speed;
+        };
+
+		void setlevel(int l) { // make sure to only use default constructor unless you want crazy scaling
+            int mod = rand() % l;
+
+            level = l;
+
+            mhealth *= pow(l, 1.5);
+            mhealth += mod;
+            health = mhealth;
+
+            attack *= pow(l, 1.6);
+            attack += mod;
+
+            defense *= pow(l, 1.7);
+            defense -= mod;
+
+            resistance *= pow(l, 1.7);
+            resistance -= mod;
+
+            speed *= pow(l, 1.3);
+            speed += mod;
+        };
+        
+        void heal() {
+            double amt;
+            double mult = 0.05 * level;
+            amt = mult * mhealth;
+            amt++;
+
+            if (amt + health >= mhealth) {
+                health = mhealth;
+            }
+            else {
+                health += amt;
+            }
+        };
+
+        void atk(Character* target) {
+            int dmg = get_attack();
+            int mod = rand() % (get_level() * 3);
+            srand(time(0));
+            int ch = rand() % 3;
+
+            if (ch == 0) {
+                dmg += mod;
+            }
+            else if (ch == 1) {
+                dmg -= mod;
+            }
+
+            if (get_type() == "Mage") {
+                dmg -= target->get_resistance();
+            }
+            else {
+                dmg -= target->get_defense();
+            }
+            
+            if (dmg < 0)
+                dmg = 0;
+
+            target->set_health(target->get_health() - dmg);
+
+            cout << target->get_name() << " took " << dmg << " points of damage" << endl;
+        };
+
+        void hurt(Character* target) { 
+            int dmg;
+            if (target->get_type() == "Mage") {
+                dmg = target->get_attack() - get_resistance();
+            }
+            else {
+                dmg = target->get_attack() - get_defense();
+            }
+
+            if (dmg < 0)
+                dmg = 0;
+            
+            set_health(get_health() - dmg);
+
+            cout << get_name() << " took " << dmg << " points of damage" << endl;
+        };
+
+        void print() {
+            cout << "Name: " << get_name() << endl;
+            cout << "Level: " << get_level() << endl;
+            cout << "Health: " << get_health() << "/" << get_max_health() << endl;
+        };
+
+        void action(Character* target) {
+            srand(time(0));
+            int act = rand() % 100;
+
+            if (get_health() > (get_max_health() / 2)) {
+                if (act < 66) {
+                    atk(target);
+                }
+                else {
+                    heal();
+                }
+            }
+            else if (get_health() > (get_max_health() / 4)) {
+                if (act < 40) {
+                    atk(target);
+                }
+                else {
+                    heal();
+                }
+            }
+            else {
+                if (act < 20) {
+                    atk(target);
+                }
+                else {
+                    heal();
+                }
+            }
+        };
+
+		bool pickLock() {return false;}; 
+
 };
 
 #endif //__CHARACTER_HPP__
-
-
