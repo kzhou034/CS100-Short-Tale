@@ -789,6 +789,7 @@ void PrintChapter4(Inventory* actionItems, Inventory* healItems, Character* play
       cout << "You are defeated by the first demon." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
+      player->set_health(player->get_max_health());
       enemy->set_health(enemy->get_max_health());
       system("cls");
       PrintChapter4(actionItems, healItems, player, enemy, enemy2);
