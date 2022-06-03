@@ -413,6 +413,7 @@ bool inCombat(Character* player, Character* enemy){
   string answer;
   while(isVictory){
     if(player->get_health() <= 0){
+      player->set_health(player->get_max_health());
       return false;
     }
     cout << "[Turn " << turnNum << "]\n" << endl;
