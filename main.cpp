@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include "Character.hpp"
 #include "gamefunc.h"
-#include "gamefunc.cpp"
 using namespace std;
 
 int main(){
