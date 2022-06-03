@@ -38,10 +38,6 @@ The "Mana Potion" class will be used to recover mana for mages.
 
 The "Health Potion" class will be used to recover health for all classes.
 
-<<<<<<< HEAD
-![UML Inventory Composite Design Pattern](https://user-images.githubusercontent.com/101243368/170891042-589ae129-fd01-4123-87a0-ee015b2168b8.png)
-
-=======
 ![UML DIAGRAM_ INVENTORY COMPOSITE](https://user-images.githubusercontent.com/101243368/171780075-7f11245f-b7fb-40fc-bfb1-63f878096317.png)
 >>>>>>> f10a1a0755d2cb45f4eee1cde2486f78b867b01c
 
