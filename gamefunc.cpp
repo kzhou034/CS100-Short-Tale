@@ -9,7 +9,7 @@ using namespace std;
 void knightSkills(Character* player, Character* enemy){
   bool isshieldraised = player->getStatus();
   string answer;
-  system("clear");
+  system("cls");
   cout << "Available Skills: " << endl;
   cout << "1) Basic Attack" << endl;
   if(!isshieldraised){
@@ -31,7 +31,7 @@ void knightSkills(Character* player, Character* enemy){
   while(answer != "1" && answer != "2" && answer != "3"){   
       cout << "\nThat doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       if(!isshieldraised){
@@ -51,9 +51,9 @@ void knightSkills(Character* player, Character* enemy){
       }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
   }
-    system("clear");
+    system("cls");
     if(answer == "3"){
       if(player->getCD() == 0){
         
@@ -79,7 +79,7 @@ void knightSkills(Character* player, Character* enemy){
           }
           answer = "";
           cin >> answer;
-          system("clear");
+          system("cls");
         }
       }
     }
@@ -106,7 +106,7 @@ void knightSkills(Character* player, Character* enemy){
 void rogueSkills(Character* player, Character* enemy){
   bool isShrouded = player->getStatus();
   string answer;
-  system("clear");
+  system("cls");
   cout << "Available Skills: " << endl;
   cout << "1) Basic Attack" << endl;
   if(player->getCD() == 0){
@@ -141,7 +141,7 @@ void rogueSkills(Character* player, Character* enemy){
   while(answer != "1" && answer != "2" && answer != "3"){   
       cout << "\nThat doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       if(player->getCD() == 0){
@@ -174,15 +174,15 @@ void rogueSkills(Character* player, Character* enemy){
     }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
   }
-    system("clear");
+    system("cls");
 
   if(player->getCD() != 0 && player->getCD2() == 0){
     while(answer != "1" && answer != "3"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       if(player->get_level() > 5){
@@ -195,7 +195,7 @@ void rogueSkills(Character* player, Character* enemy){
       }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
 
@@ -203,27 +203,27 @@ void rogueSkills(Character* player, Character* enemy){
     while(answer != "1"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
   if(player->getCD() == 0 && player->getCD2() != 0){
     while(answer != "1" && answer != "2"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       cout << "2) Sneak Attack" << endl;
       cout << "        Deals an attack that ignores 50% of the enemy's armor." << endl;
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
 
@@ -257,7 +257,7 @@ void rogueSkills(Character* player, Character* enemy){
 
 void mageSkills(Character* player, Character* enemy){
   string answer;
-  system("clear");
+  system("cls");
   cout << "Available Skills: " << endl;
   cout << "1) Basic Attack" << endl;
   if(player->getCD() == 0){
@@ -292,7 +292,7 @@ void mageSkills(Character* player, Character* enemy){
   while(answer != "1" && answer != "2" && answer != "3"){   
       cout << "\nThat doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       if(player->getCD() == 0){
@@ -325,15 +325,15 @@ void mageSkills(Character* player, Character* enemy){
   }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
   }
-    system("clear");
+    system("cls");
 
   if(player->getCD() != 0 && player->getCD2() == 0){
     while(answer != "1" && answer != "3"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       if(player->get_level() > 5){
@@ -346,7 +346,7 @@ void mageSkills(Character* player, Character* enemy){
       }
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
 
@@ -354,27 +354,27 @@ void mageSkills(Character* player, Character* enemy){
     while(answer != "1"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
   if(player->getCD() == 0 && player->getCD2() != 0){
     while(answer != "1" && answer != "2"){   
       cout << "That doesn't seem to be a valid answer. Please try again.\n" << endl;
       sleep(2);
-      system("clear");
+      system("cls");
       cout << "Available Skills: " << endl;
       cout << "1) Basic Attack" << endl;
       cout << "2) Thunder Cloud" << endl;
       cout << "        Cast a spell of thunder." << endl;
       answer = "";
       cin >> answer;
-      system("clear");
+      system("cls");
     }
   }
 
@@ -437,7 +437,7 @@ bool inCombat(Character* player, Character* enemy){
     while(answer != "1" && answer != "2" && answer != "3" && answer != "4" && answer != "5"){   
         cout << "\nThat doesn't seem to be a valid answer. Please try again.\n" << endl;
         sleep(2);
-        system("clear");
+        system("cls");
         cout << "[Turn " << turnNum << "]\n" << endl;
         cout << "Name: " << enemy->get_name() << "\nType: " << enemy->get_type() << "\nHealth: " << enemy->get_health() << endl << endl << endl;
         cout << "You currently have " << player->get_health() << " health." << endl;
@@ -464,7 +464,7 @@ bool inCombat(Character* player, Character* enemy){
           }
           cout << "Press any key to continue." << endl;
           cin >> answer;
-          system("clear");
+          system("cls");
         }
     }
     else if (answer == "2") {
@@ -488,17 +488,17 @@ bool inCombat(Character* player, Character* enemy){
           }
           cout << "Press any key to continue." << endl;
           cin >> answer;
-          system("clear");
+          system("cls");
         }
     }
       
     else if (answer == "3") {
         cout << "You open inventory" << endl;
       
-        system("clear");
+        system("cls");
     }
     else if (answer == "4") {
-        system("clear");
+        system("cls");
         cout << "Name: " << player->get_name() << endl;
         cout << "Class: " << player->get_type() << endl;
         cout << "Level: " << player->get_level() << endl;
@@ -511,12 +511,12 @@ bool inCombat(Character* player, Character* enemy){
         turnNum--;
         player->setCD();
         openedstats = true;
-        system("clear");
+        system("cls");
     }
 
     else if (answer == "5") {
         cout << "You try to run away." << endl;
-        system("clear");
+        system("cls");
         return false;
     }
     turnNum++;
@@ -550,12 +550,12 @@ void PrintChapter1(Character* player, Character* enemy){
       cout << "You are defeated by the monkey." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      system("clear");
+      system("cls");
       PrintChapter1(player, enemy);
     }
     
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
 void PrintChapter2(Character* player, Character* enemy){
@@ -580,11 +580,11 @@ void PrintChapter2(Character* player, Character* enemy){
       PrintChapter2(player, enemy);
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      system("clear");
+      system("cls");
     }
 
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
 void PrintChapter3(Character* player, Character* enemy){
@@ -637,12 +637,12 @@ void PrintChapter3(Character* player, Character* enemy){
       cout << "You are defeated by the bandits." << endl;
       cout << "Restart the chapter?" << endl;
       cin >> answer;
-      system("clear");
+      system("cls");
       PrintChapter3(player, enemy);
     }
 
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
 void PrintChapter4(Character* player, Character* enemy, Character* enemy2){
@@ -666,7 +666,7 @@ void PrintChapter4(Character* player, Character* enemy, Character* enemy2){
       cout << "Restart the chapter?" << endl;
       cin >> answer;
       PrintChapter4(player, enemy, enemy2);
-      system("clear");
+      system("cls");
     }
 
     isVictory = inCombat(player, enemy2);
@@ -678,11 +678,11 @@ void PrintChapter4(Character* player, Character* enemy, Character* enemy2){
       cout << "Restart the chapter?" << endl;
       cin >> answer;
       PrintChapter4(player, enemy, enemy2);
-      system("clear");
+      system("cls");
     }
 
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
 void PrintChapter5(Character* player, Character* enemy){
@@ -709,11 +709,11 @@ void PrintChapter5(Character* player, Character* enemy){
       cout << "Restart the chapter?" << endl;
       cin >> answer;
       PrintChapter5(player, enemy);
-      system("clear");
+      system("cls");
     }
 
     sleep(10);
-    system("clear");
+    system("cls");
 }
 
 void PrintChapter6(Character* player, Character* enemy){
@@ -765,3 +765,5 @@ void PrintChapter6(Character* player, Character* enemy){
     cout << "The End." << endl;
     sleep(10);
 }
+
+
