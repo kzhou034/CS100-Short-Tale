@@ -558,7 +558,7 @@ bool inCombat(Inventory* actionItems, Inventory* healItems, Character* player, C
           return true;
         }
         else{
-          if(enemy->get_speed() < player->get_speed()){
+          if(enemy->get_speed() <= player->get_speed()){
             enemy->action(player);
           }
           cout << "Press any key to continue." << endl;
@@ -577,12 +577,13 @@ bool inCombat(Inventory* actionItems, Inventory* healItems, Character* player, C
         mageSkills(player, enemy);
       }
       cout << endl;
-        sleep(2);
-        if(enemy->get_health() <= 0){
+      sleep(2);
+      
+      if(enemy->get_health() <= 0){
           return true;
       }
       else{
-          if(enemy->get_speed() < player->get_speed()){
+          if(enemy->get_speed() <= player->get_speed()){
             enemy->action(player);
           }
           cout << "Press any key to continue." << endl;
@@ -619,7 +620,7 @@ bool inCombat(Inventory* actionItems, Inventory* healItems, Character* player, C
 
     else if (answer == "5") {
         cout << "You try to run away." << endl;
-        if(player->get_speed() > enemy->get_speed()){
+        if(player->get_speed() >= enemy->get_speed()){
           system("cls");
           return false;
         }
@@ -712,7 +713,7 @@ void PrintChapter3(Inventory* actionItems, Inventory* healItems, Inventory* heal
     if(answer == "1"){
       cout << "In the alleyway, you find two scavengers fighting each other over a small chest. Upon seeing you, however, both flee." << endl;
       sleep(3);
-      cout << "Perhaps they thought you were a knight." << endl;
+      cout << "Perhaps they thought you were the knight of the town." << endl;
       sleep(3);
       cout << "Picking up the chest, you find that it has a small lock. Do you want to lockpick?" << endl;
       sleep(1.5);
@@ -723,17 +724,17 @@ void PrintChapter3(Inventory* actionItems, Inventory* healItems, Inventory* heal
       cin >> answer;
       if(answer == "1"){
         if(player->get_type() != "Rogue"){
-          cout << "You do not possess the skill to lockpick."<< endl;
+          cout << "\nYou do not possess the skill to lockpick."<< endl;
           cout << "Hint: Only Rogues can lockpick!"<< endl;
         }
         else{
           if(player->pickLock()){
-            cout << "You successfully pick the lock."<< endl;
+            cout << "\nYou successfully pick the lock."<< endl;
             healItems->setChild(healthPotion);
             cout << endl;
           }
           else if(!player->pickLock()){
-            cout << "You failed to pick the lock." << endl;
+            cout << "\nYou failed to pick the lock." << endl;
             cout << "Hint: You can only lock pick twice!" << endl;
           }
         }
@@ -784,6 +785,8 @@ void PrintChapter4(Inventory* actionItems, Inventory* healItems, Character* play
     bool isVictory = inCombat(actionItems, healItems, player, enemy);
     if(isVictory){
       cout <<  "You defeat the first demon." << endl;
+      cout << "Press any key to continue." << endl;
+      cin >> answer;
     }
     else{
       cout << "You are defeated by the first demon." << endl;
@@ -947,13 +950,23 @@ while(answer == "1"){
   } 
 
   if (answer == "1"){
+    if(gold >= 50){
      actionItem->setChild(smokeBomb);
      gold -=50;
+      }
+    else{
+      cout << "\nYou do not possess enough gold to purchase this item." << endl;
+    }
   }
 
   if (answer == "2"){
+    if(gold >= 50){
      healItem->setChild(healthPotion);
-    gold -=50;
+     gold -=50;
+      }
+    else{
+      cout << "\nYou do not possess enough gold to purchase this item." << endl;
+    }
   }
   
   if (answer == "3"){
@@ -1014,17 +1027,32 @@ while(answer == "1"){
   } 
 
   if (answer == "1"){
+    if(gold >= 25){
      actionItem->setChild(smokeBomb);
      gold -=25;
+      }
+    else{
+      cout << "\nYou do not possess enough gold to purchase this item." << endl;
+    }
   }
 
   if (answer == "2"){
-     healItem->setChild(healthPotion);
-    gold -=25;
+    if(gold >= 25){
+      healItem->setChild(healthPotion);
+     gold -=25;
+      }
+    else{
+      cout << "\nYou do not possess enough gold to purchase this item." << endl;
+    }
   }
   if (answer == "3"){
-     healItem->setChild(strengthPotion);
-    gold -=50;
+    if(gold >= 50){
+     actionItem->setChild(strengthPotion);
+     gold -=50;
+      }
+    else{
+      cout << "\nYou do not possess enough gold to purchase this item." << endl;
+    }
   }
   
   if (answer == "4"){
@@ -1053,4 +1081,5 @@ while(answer == "1"){
   sleep(3);
   system("cls");
 }
+
 
