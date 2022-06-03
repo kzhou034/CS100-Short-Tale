@@ -23,6 +23,7 @@ class Character {
       virtual ~Character() {};
 
 		virtual void set_name(string) = 0;
+
         virtual void set_type(string) = 0;
         virtual void set_level(int) = 0;
         virtual void set_health(int) = 0;
@@ -110,7 +111,6 @@ class Knight : public Character {
             speed = -1;
         };
         ~Knight() {};
-
         Knight(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
             name = _name;
             type = _type;
@@ -321,6 +321,7 @@ class Mage : public Character {
         ~Mage() {};
 
         Mage(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) : Character() {
+
             name = _name;
             type = _type;
 
@@ -554,7 +555,9 @@ class Rogue : public Character {
         };
         ~Rogue() {};
 
+
         Rogue(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
+
             name = _name;
             type = _type;
 
