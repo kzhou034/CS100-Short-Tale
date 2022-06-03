@@ -61,28 +61,36 @@ int main(){
     cin >> answer;
     system("cls");
 
+
     while(answer != "1" && answer != "2"){
         cout << "That doesn't seem to be a valid answer. Please press 1 for Yes and 2 for No." << endl;
         answer = "";
         cin >> answer;
+
         system("cls");
     }
+
 
 
     while(answer == "2"){
         cout << "I see. Once again, what is your name?" << endl;
         name = "";
         cin >> name;
+
         system("cls");
+
         cout << "I see. So your name is " << name << "?" << endl;       //rechecks name
         cout << "Press 1 for Yes and 2 for No." << endl;                //redoes confirmation line
         answer = "";
         cin >> answer;
+
         system("cls");
+
         while(answer != "1" && answer != "2"){   //re-asks if invalid answer is given
             cout << "That doesn't seem to be a valid answer. Please press 1 for Yes and 2 for No." << endl;
             answer = "";
             cin >> answer;
+
           system("cls");
         }
     }

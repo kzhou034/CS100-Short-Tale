@@ -487,7 +487,9 @@ class Mage : public Character {
         };
         void waningMoon(Character* target){
             int dmg = get_attack() * 1.2;
+
             int heal = 0.2 * get_max_health();
+
             double realdmg1 = 75;
             double realdmg2 = 0;
             if (get_type() == "Mage") {
@@ -501,7 +503,9 @@ class Mage : public Character {
                 dmg *= realdmg1;
             }
             target->set_health(target->get_health() - dmg);
+
             set_health(get_health() + heal);
+
           
             cout << "You cast a spell of moon's blessing.\n" << endl;
             cout << "You heal " << heal << " points of health." << endl; 
@@ -547,7 +551,9 @@ class Rogue : public Character {
         };
         ~Rogue() {};
 
+
         Rogue(const string & _name, const string & _type, int _health, int _attack, int _defense , int _resistance , int _speed) {
+
             name = _name;
             type = _type;
 
@@ -676,7 +682,9 @@ class Rogue : public Character {
         void action(Character* target) {};
 
         bool pickLock() {
+
             if (max_lockpicks > 0) {
+
                 lockPick = true;
                 max_lockpicks--;
                 return true;
@@ -898,6 +906,7 @@ class Enemy : public Character {
             health = mhealth;
 
             attack *= pow(l, 1.2);
+
             attack += mod;
 
             defense *= pow(l, 1.7);
@@ -912,6 +921,7 @@ class Enemy : public Character {
         
         void heal() {
             double amt;
+
             double mult = level;
             if(get_level() > 4){
               mult *= 0.035;
@@ -919,6 +929,7 @@ class Enemy : public Character {
           else{
             mult *= 0.05;
           }
+
             amt = mult * mhealth;
             amt++;
 
@@ -928,8 +939,10 @@ class Enemy : public Character {
             else {
                 health += amt;
             }
+
             int val = amt;
             cout << "The " << get_name() << " healed for " << val << "." << endl;
+
         };
 
         void atk(Character* target) {
@@ -1002,7 +1015,9 @@ class Enemy : public Character {
                 }
             }
             else if (get_health() > (get_max_health() / 4)) {
+
                 if (act < 70) {
+
                     atk(target);
                 }
                 else {
@@ -1041,3 +1056,5 @@ class Enemy : public Character {
         void waningMoon(Character* target){};
 };
 #endif //__CHARACTER_HPP__
+
+
